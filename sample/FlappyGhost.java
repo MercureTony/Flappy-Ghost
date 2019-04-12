@@ -48,10 +48,10 @@ public class FlappyGhost extends Application {
         // Load images
         Image bg = new Image("file:src/sample/images/bg.png");
         Image ghost = new Image("file:src/sample/images/ghost.png");
-        Image[] obstacle = new Image[27];
+        Image[] obstacle = new Image[46];
 
         // Load obstacles
-        for (int i = 0; i < 27; i++){
+        for (int i = 0; i < 46; i++){
             String path = "file:src/sample/images/";
             obstacle[i] = new Image(path+i+".png");
         }
