@@ -35,12 +35,12 @@ public class FlappyGhost extends Application {
         // Load images
         Image bg = new Image("file:src/sample/images/bg.png");
         Image ghost = new Image("file:src/sample/images/ghost.png");
-        String[] obstacle = new String[27];
+        Image[] obstacle = new Image[27];
 
         // Load obstacles
         for (int i = 0; i < 27; i++){
             String path = "file:src/sample/images/";
-            obstacle[i] = path+i+".png";
+            obstacle[i] = new Image(path+i+".png");
         }
 
 
