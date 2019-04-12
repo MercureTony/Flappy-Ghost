@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -30,15 +31,17 @@ public class FlappyGhost extends Application {
     Text score;
     CheckBox debug;
     Separator[] separator = new Separator[2];
+    final int MAX_WIDTH = 640;
+    final int MAX_HEIGHT = 440;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         VBox root = new VBox();
-        Scene scene = new Scene(root, 640, 440);
+        Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
         // Stage Key Events
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
-                primaryStage.close();
+                Platform.exit();
             }
         });
 
@@ -56,8 +59,8 @@ public class FlappyGhost extends Application {
 
         // Background scene
         VBox  gameScene =  new VBox();
-        gameScene.setPrefHeight(400);
-        gameScene.setPrefWidth(640);
+        gameScene.minHeight(MAX_HEIGHT);
+        gameScene.minWidth(MAX_WIDTH);
         root.getChildren().add(gameScene);
 
         try {
@@ -73,12 +76,13 @@ public class FlappyGhost extends Application {
         for (int i = 0; i < separator.length; i++){
             separator[i] = new Separator();
             separator[i].setOrientation(Orientation.VERTICAL);
+            separator[i].setMinHeight(40);
         }
 
         // Menu
         HBox menu = new HBox(5);
         menu.setAlignment(Pos.CENTER);
-        menu.setPadding(new Insets(6,0,0,10));
+        menu.setPadding(new Insets(0,0,0,5));
         // Items of the menu
         pause = new Button("Pause");
         debug = new CheckBox("Mode debug");
