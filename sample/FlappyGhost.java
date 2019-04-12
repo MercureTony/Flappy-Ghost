@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -25,7 +28,7 @@ public class FlappyGhost extends Application {
     Button pause;
     Text score;
     CheckBox debug;
-    Separator separator = new Separator();
+    Separator[] separator = new Separator[2];
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -59,22 +62,27 @@ public class FlappyGhost extends Application {
             e.printStackTrace();
         }
 
-        // Menu
-        HBox menu = new HBox();
-        menu.setAlignment(Pos.CENTER);
-        menu.setPrefHeight(40);
-        menu.setPrefWidth(640);
-        menu.setPadding(new Insets(6,0,0,10));
+        // Separator
+        for (int i = 0; i < separator.length; i++){
+            separator[i] = new Separator();
+            separator[i].setOrientation(Orientation.VERTICAL);
+        }
 
+        // Menu
+        HBox menu = new HBox(5);
+        menu.setAlignment(Pos.CENTER);
+        menu.setPadding(new Insets(6,0,0,10));
         // Items of the menu
         pause = new Button("Pause");
         debug = new CheckBox("Mode debug");
         score = new Text("Score:");
-        separator.setOrientation(Orientation.VERTICAL);
-            menu.getChildren().add(pause);
-            menu.getChildren().add(separator);
-            menu.getChildren().add(debug);
-            menu.getChildren().add(score);
+        score.setFont(Font.font("Verdana", FontWeight.BOLD, 10));
+        // Set of the items
+        menu.getChildren().add(pause);
+        menu.getChildren().add(separator[0]);
+        menu.getChildren().add(debug);
+        menu.getChildren().add(separator[1]);
+        menu.getChildren().add(score);
 
         gameScene.getChildren().add(menu);
 
