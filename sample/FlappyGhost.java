@@ -33,6 +33,7 @@ public class FlappyGhost extends Application {
     Separator[] separator = new Separator[2];
     final int MAX_WIDTH = 640;
     final int MAX_HEIGHT = 440;
+    public static final int NBR_IMAGES = 46;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -48,10 +49,10 @@ public class FlappyGhost extends Application {
         // Load images
         Image bg = new Image("file:src/sample/images/bg.png");
         Image ghost = new Image("file:src/sample/images/ghost.png");
-        Image[] obstacle = new Image[46];
+        Image[] obstacle = new Image[NBR_IMAGES];
 
         // Load obstacles
-        for (int i = 0; i < 46; i++){
+        for (int i = 0; i < NBR_IMAGES; i++){
             String path = "file:src/sample/images/";
             obstacle[i] = new Image(path+i+".png");
         }

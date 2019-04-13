@@ -6,6 +6,6 @@ public class Flappy extends Personnage {
     public static final int radius = 30;
 
     public Flappy(int x, int y){
-        super(x,y,Flappy.radius);
+        super(x,y);
     }
 }

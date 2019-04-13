@@ -1,14 +1,13 @@
 package sample;
 
 public abstract class Personnage {
-    private int xCoordinate;
-    private int yCoordinate;
-    private int radius;
+    protected int xCoordinate;
+    protected int yCoordinate;
+    protected int radius;
 
-    public Personnage(int xCoordinate,int yCoordinate,int radius){
+    public Personnage(int xCoordinate,int yCoordinate){
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
-        this.radius = radius;
     }
 
     public int getRadius() {
