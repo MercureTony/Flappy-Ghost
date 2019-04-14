@@ -10,6 +10,9 @@ public class Flappy extends Personnage {
     private int ax = 0;
     private int ay = 500;
 
+    // Score de Flappy
+    private int score = 0;
+
     /**
      * Constructeur du joueur Flappy
      *
@@ -22,10 +25,36 @@ public class Flappy extends Personnage {
 
     /**
      *
+     * @return le score actuel à l'instant t
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Modifie le score
+     *
+     * @param score
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
+     *
      * @return la vitesse en abscisse
      */
     public int getVx() {
         return vx;
+    }
+
+    /**
+     * Modifie la vitesse en abscisse
+     *
+     * @param vx
+     */
+    public void setVx(int vx) {
+        this.vx = vx;
     }
 
     /**
@@ -34,6 +63,15 @@ public class Flappy extends Personnage {
      */
     public int getVy() {
         return vy;
+    }
+
+    /**
+     * Modifie la vitesse en ordonnée
+     *
+     * @param vy
+     */
+    public void setVy(int vy) {
+        this.vy = vy;
     }
 
     /**
@@ -53,23 +91,40 @@ public class Flappy extends Personnage {
     }
 
     /**
+     * Modifie l'accélération en ordonnée
+     *
+     * @param ay
+     */
+    public void setAy(int ay) {
+        this.ay = ay;
+    }
+
+    /**
      * Méthode qui permet de c'augmenter la vitesse/accélération après deux obstacles dépassés
      *
      */
     public void update(){
         vy += 15;
         ay += 15;
-        if (ay > 300){
-            ay = 300;
+        if (vy > 300){
+            vy = 300;
         }
     }
 
     /**
-     * Cette méthode permet d'augmnenter la vitesse à 150px/s quand le fantôme saute
+     * Cette méthode permet d'augmnenter la vitesse à 300px/s quand le fantôme saute
      *
-     * @return La vitesse (150px/s) du fantôme quand il saute
+     * @return La vitesse (300px/s) du fantôme quand il saute
      */
     public int jump(){
-        return ax = 150;
+        return vx = 300;
+    }
+
+    public void testIntersect(Personnage other) {
+        if (intersect(other)) {
+            setScore(0);
+            setVy(120);
+            setAy(500);
+        }
     }
 }
