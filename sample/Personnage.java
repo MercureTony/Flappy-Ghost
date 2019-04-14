@@ -28,7 +28,7 @@ public abstract class Personnage {
      *
      * @return retourne l'abscisse
      */
-    public double getxCoordinate() {
+    public double getXCoordinate() {
         return xCoordinate;
     }
 
@@ -36,7 +36,7 @@ public abstract class Personnage {
      *
      * @return retourne l'ordonnée
      */
-    public double getyCoordinate() {
+    public double getYCoordinate() {
         return yCoordinate;
     }
 
@@ -54,7 +54,7 @@ public abstract class Personnage {
      *
      * @param xCoordinate la nouvelle abscisse
      */
-    public void setxCoordinate(int xCoordinate) {
+    public void setXCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
@@ -63,7 +63,7 @@ public abstract class Personnage {
      *
      * @param yCoordinate la nouvelle ordonnée
      */
-    public void setyCoordinate(int yCoordinate) {
+    public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 
