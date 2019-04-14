@@ -1,8 +1,8 @@
 package sample;
 
 public abstract class Personnage {
-    protected int xCoordinate;
-    protected int yCoordinate;
+    protected double xCoordinate;
+    protected double yCoordinate;
     protected int radius;
 
     public Personnage(int xCoordinate,int yCoordinate){
@@ -14,11 +14,11 @@ public abstract class Personnage {
         return radius;
     }
 
-    public int getxCoordinate() {
+    public double getxCoordinate() {
         return xCoordinate;
     }
 
-    public int getyCoordinate() {
+    public double getyCoordinate() {
         return yCoordinate;
     }
 
@@ -32,5 +32,13 @@ public abstract class Personnage {
 
     public void setyCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
+    }
+
+    public boolean intersect(Personnage other){
+        double dx = this.xCoordinate - other.xCoordinate;
+        double dy = this.yCoordinate - other.yCoordinate;
+        double dCarre = Math.pow(dx,dx)+Math.pow(dy,dy);
+
+        return dCarre < Math.pow(this.xCoordinate+other.xCoordinate,2);
     }
 }
