@@ -26,17 +26,23 @@ import javafx.scene.control.Button;
 import java.awt.*;
 
 public class FlappyGhost extends Application {
-
+    // Components of the window
     Button pause;
     Text score;
     CheckBox debug;
     Separator[] separator = new Separator[2];
     final int MAX_WIDTH = 640;
     final int MAX_HEIGHT = 440;
-    public static final int NBR_IMAGES = 46;
+    String path = "file:src/sample/images/";
+    // Flappy
+    Flappy flappy = new Flappy(340,400);
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        /**
+         * Platform design
+         *
+         */
         VBox root = new VBox();
         Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
         // Stage Key Events
@@ -47,31 +53,23 @@ public class FlappyGhost extends Application {
         });
 
         // Load images
-        Image bg = new Image("file:src/sample/images/bg.png");
-        Image ghost = new Image("file:src/sample/images/ghost.png");
-        Image[] obstacle = new Image[NBR_IMAGES];
+        Image bg = new Image(path+"bg.png");
+        Image ghost = new Image(path+"ghost.png");
+        Image[] obstacle = new Image[Obstacles.NBR_IMAGES];
 
         // Load obstacles
-        for (int i = 0; i < NBR_IMAGES; i++){
-            String path = "file:src/sample/images/";
+        for (int i = 0; i < Obstacles.NBR_IMAGES; i++){
             obstacle[i] = new Image(path+i+".png");
         }
-
 
         // Background scene
         VBox  gameScene =  new VBox();
         gameScene.minHeight(MAX_HEIGHT);
         gameScene.minWidth(MAX_WIDTH);
         root.getChildren().add(gameScene);
-
-        try {
-            ImageView imgView = new ImageView();
-            imgView.setImage(bg);
-            gameScene.getChildren().add(imgView);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        ImageView imgView = new ImageView();
+        imgView.setImage(bg);
+        gameScene.getChildren().add(imgView);
 
         // Separator
         for (int i = 0; i < separator.length; i++){
@@ -95,8 +93,17 @@ public class FlappyGhost extends Application {
         menu.getChildren().add(debug);
         menu.getChildren().add(separator[1]);
         menu.getChildren().add(score);
-
         gameScene.getChildren().add(menu);
+
+        /**
+         * Game code
+         */
+        scene.setOnMouseClicked((event) -> {
+            System.out.println("Clic en : (" +
+                    event.getX() + ", " + event.getY() +
+                    ")");
+        });
+
 
         // Title of game
         primaryStage.setTitle("Flappy Ghost");

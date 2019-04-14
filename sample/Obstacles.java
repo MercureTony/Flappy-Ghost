@@ -1,15 +1,17 @@
 package sample;
 
 public class Obstacles extends Personnage {
-    private int x_Coordinate;
-    private int y_Coordinate;
     private int radius;
     public static final int NBR_IMAGES = 46;
 
+    /**
+     * Constructeur des obstacles
+     *
+     * @param x abscisse de l'ennemie
+     * @param y ordonnnéé de l'ennemie
+     */
     public Obstacles(int x, int y) {
         super(x, y);
-        this.x_Coordinate = x;
-        this.y_Coordinate = y;
     }
 
     /**
@@ -28,10 +30,11 @@ public class Obstacles extends Personnage {
      */
 
     @Override
-    public void setRadius(int radius) {
+    public int getRadius() {
         radius = (int) Math.floor(Math.random() * NBR_IMAGES);
         if (radius < 10) {
-            radius = 10;
+            setRadius(10);
         }
+        return radius;
     }
 }
