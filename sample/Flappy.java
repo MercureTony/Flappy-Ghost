@@ -120,6 +120,11 @@ public class Flappy extends Personnage {
         return vx = 300;
     }
 
+    /**
+     * Vérifie si Flappy intersecte un obstacle, si oui, réinitialise son compteur
+     * 
+     * @param other qui représente les obstacles
+     */
     public void testIntersect(Personnage other) {
         if (intersect(other)) {
             setScore(0);

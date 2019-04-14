@@ -1,7 +1,7 @@
 package sample;
 
 public class Obstacles extends Personnage {
-    private int radius;
+    private Integer radius;
     public static final int NBR_IMAGES = 46;
 
     /**
@@ -31,10 +31,17 @@ public class Obstacles extends Personnage {
 
     @Override
     public int getRadius() {
-        radius = (int) Math.floor(Math.random() * NBR_IMAGES);
-        if (radius < 10) {
-            setRadius(10);
+        if (radius == null){
+            setRadius(0);
         }
         return radius;
+    }
+
+    @Override
+    public void setRadius(int unnecessary) {
+        this.radius = (int) Math.floor(Math.random() * NBR_IMAGES);
+        if (this.radius < 10){
+            radius = 10;
+        }
     }
 }

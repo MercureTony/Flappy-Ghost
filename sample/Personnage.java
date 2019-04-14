@@ -76,8 +76,8 @@ public abstract class Personnage {
     public boolean intersect(Personnage other){
         double dx = this.xCoordinate - other.xCoordinate;
         double dy = this.yCoordinate - other.yCoordinate;
-        double dCarre = Math.pow(dx,2)+Math.pow(dy,2);
+        double dCarre = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 
-        return dCarre < Math.pow(this.xCoordinate+other.xCoordinate,2);
+        return dCarre < this.xCoordinate+other.xCoordinate;
     }
 }
