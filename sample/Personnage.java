@@ -54,7 +54,7 @@ public abstract class Personnage {
      *
      * @param xCoordinate la nouvelle abscisse
      */
-    public void setXCoordinate(int xCoordinate) {
+    public void setXCoordinate(double xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
@@ -63,7 +63,7 @@ public abstract class Personnage {
      *
      * @param yCoordinate la nouvelle ordonnée
      */
-    public void setYCoordinate(int yCoordinate) {
+    public void setYCoordinate(double yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 
