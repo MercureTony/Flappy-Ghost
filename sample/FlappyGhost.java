@@ -9,12 +9,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -63,13 +66,14 @@ public class FlappyGhost extends Application {
         }
 
         // Background scene
-        VBox  gameScene =  new VBox();
-        gameScene.minHeight(MAX_HEIGHT);
-        gameScene.minWidth(MAX_WIDTH);
-        root.getChildren().add(gameScene);
+        Pane pane = new Pane();
+        root.getChildren().add(pane);
+        Canvas gameScene = new Canvas(MAX_WIDTH,400);
+        pane.getChildren().add(gameScene);
+        GraphicsContext context = gameScene.getGraphicsContext2D();
         ImageView imgView = new ImageView();
         imgView.setImage(bg);
-        gameScene.getChildren().add(imgView);
+        context.drawImage(bg,0,0);
 
         // Separator
         for (int i = 0; i < separator.length; i++){
@@ -93,7 +97,7 @@ public class FlappyGhost extends Application {
         menu.getChildren().add(debug);
         menu.getChildren().add(separator[1]);
         menu.getChildren().add(score);
-        gameScene.getChildren().add(menu);
+        root.getChildren().add(1,menu);
 
         /**
          * Game code
@@ -104,7 +108,9 @@ public class FlappyGhost extends Application {
                     ")");
         });
 
-
+        /**
+         * Window Launcher
+         */
         // Title of game
         primaryStage.setTitle("Flappy Ghost");
         // Icon of the game

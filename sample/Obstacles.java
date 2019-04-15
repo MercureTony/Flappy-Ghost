@@ -31,12 +31,7 @@ public class Obstacles extends Personnage {
 
     @Override
     public int getRadius() {
-       try{
-           return radius;
-       }
-       catch (Exception e){
-           e.printStackTrace();
-       }
+      return (radius == 0) ? 0 : radius;
     }
 
     @Override
