@@ -1,7 +1,7 @@
 package sample;
 
 public class Obstacles extends Personnage {
-    private Integer radius;
+    private int radius;
     public static final int NBR_IMAGES = 46;
 
     /**
@@ -31,10 +31,12 @@ public class Obstacles extends Personnage {
 
     @Override
     public int getRadius() {
-        if (radius == null){
-            setRadius(0);
-        }
-        return radius;
+       try{
+           return radius;
+       }
+       catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     @Override

@@ -78,6 +78,6 @@ public abstract class Personnage {
         double dy = this.yCoordinate - other.yCoordinate;
         double dCarre = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 
-        return dCarre < this.xCoordinate+other.xCoordinate;
+        return dCarre < this.radius+other.radius;
     }
 }
