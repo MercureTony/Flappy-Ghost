@@ -30,8 +30,11 @@ public class Obstacles extends Personnage {
      */
 
     @Override
-    public int getRadius() {
-      return (radius == 0) ? 0: radius;
+    public int getRadius() throws NullPointerException {
+        if (radius == 0) {
+            throw new NullPointerException("Le rayon n'a pas été défini");
+        }
+        return radius;
     }
 
     public void setRadius() {
