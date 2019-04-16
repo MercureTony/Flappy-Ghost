@@ -31,7 +31,7 @@ public class Obstacles extends Personnage {
 
     @Override
     public int getRadius() {
-      return (radius == 0) ? radius = (int) Math.floor(Math.random() * NBR_IMAGES) : radius;
+      return (radius == 0) ? 0: radius;
     }
 
     public void setRadius() {
