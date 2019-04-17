@@ -1,6 +1,7 @@
 public abstract class Personnage {
-    protected double xCoordinate;
-    protected double yCoordinate;
+
+    protected int xCoordinate;
+    protected int yCoordinate;
     protected int rayon;
 
     /**
@@ -15,6 +16,19 @@ public abstract class Personnage {
     }
 
     /**
+     * Constructeur du Personnage
+     *
+     * @param xCoordinate abscisse du Personnage
+     * @param yCoordinate ordonnée du Personnage
+     * @param rayon La grandeur du personnage
+     */
+    public Personnage(int xCoordinate, int yCoordinate, int rayon) {
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
+        this.rayon = rayon;
+    }
+
+    /**
      *
      * @return le rayon du Personnnage
      */
@@ -26,7 +40,7 @@ public abstract class Personnage {
      *
      * @return retourne l'abscisse
      */
-    public double getXCoordinate() {
+    public int getXCoordinate() {
         return this.xCoordinate;
     }
 
@@ -34,7 +48,7 @@ public abstract class Personnage {
      *
      * @return retourne l'ordonnée
      */
-    public double getYCoordinate() {
+    public int getYCoordinate() {
         return this.yCoordinate;
     }
 
@@ -52,7 +66,7 @@ public abstract class Personnage {
      *
      * @param xCoordinate la nouvelle abscisse
      */
-    public void setXCoordinate(double xCoordinate) {
+    public void setXCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
     }
 
@@ -61,7 +75,7 @@ public abstract class Personnage {
      *
      * @param yCoordinate la nouvelle ordonnée
      */
-    public void setYCoordinate(double yCoordinate) {
+    public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     }
 
@@ -72,9 +86,9 @@ public abstract class Personnage {
      * @return un booléen qui vérifie la collision
      */
     public boolean intersect(Personnage other) {
-        double dx = this.xCoordinate - other.xCoordinate;
-        double dy = this.yCoordinate - other.yCoordinate;
-        double dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
+        int dx = this.xCoordinate - other.xCoordinate;
+        int dy = this.yCoordinate - other.yCoordinate;
+        int dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
 
         return dCarre < Math.pow(this.rayon + other.rayon, 2);
     }

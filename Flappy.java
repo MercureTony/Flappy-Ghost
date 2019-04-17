@@ -1,5 +1,4 @@
 public class Flappy extends Personnage {
-    public static final int rayon = 30;
 
     // Vitesse de 120 px/s en ordonnée au début du jeu
     private int vy = 120;
@@ -15,16 +14,17 @@ public class Flappy extends Personnage {
     /**
      * Constructeur du joueur Flappy
      *
-     * @param x abscisse de Flappy
-     * @param y ordonnée de Flappy
+     * @param x abscisse de Flappy initial
+     * @param y ordonnée de Flappy initial
      */
     public Flappy(int x, int y) {
-        super(x, y);
+        // Rayon de 30px
+        super(x, y, 30);
     }
 
     /**
      *
-     * @return le score actuel à l'instant t
+     * @return score
      */
     public int getScore() {
         return this.score;
@@ -106,7 +106,7 @@ public class Flappy extends Personnage {
     }
 
     /**
-     * Méthode qui permet de c'augmenter la vitesse/accélération après deux obstacles dépassés
+     * Augmenter la vitesse/accélération après deux obstacles dépassés
      *
      */
     public void update() {
