@@ -1,7 +1,7 @@
 public abstract class Personnage {
     protected double xCoordinate;
     protected double yCoordinate;
-    protected int radius;
+    protected int rayon;
 
     /**
      * Constructeur du Personnage
@@ -9,7 +9,7 @@ public abstract class Personnage {
      * @param xCoordinate abscisse du Personnage
      * @param yCoordinate ordonnée du Personnage
      */
-    public Personnage(int xCoordinate,int yCoordinate){
+    public Personnage(int xCoordinate, int yCoordinate) {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
     }
@@ -18,8 +18,8 @@ public abstract class Personnage {
      *
      * @return le rayon du Personnnage
      */
-    public int getRadius() {
-        return radius;
+    public int getRayon() {
+        return this.rayon;
     }
 
     /**
@@ -27,7 +27,7 @@ public abstract class Personnage {
      * @return retourne l'abscisse
      */
     public double getXCoordinate() {
-        return xCoordinate;
+        return this.xCoordinate;
     }
 
     /**
@@ -35,16 +35,16 @@ public abstract class Personnage {
      * @return retourne l'ordonnée
      */
     public double getYCoordinate() {
-        return yCoordinate;
+        return this.yCoordinate;
     }
 
     /**
      * Modifie le rayon
      *
-     * @param radius qui est le nouveau rayon du Personnage
+     * @param rayon qui est le nouveau rayon du Personnage
      */
-    public void setRadius(int radius) {
-        this.radius = radius;
+    public void setRayon(int rayon) {
+        this.rayon = rayon;
     }
 
     /**
@@ -71,11 +71,11 @@ public abstract class Personnage {
      * @param other qui l'autre Personnage avec qui ont vérfie l'intersection
      * @return un booléen qui vérifie la collision
      */
-    public boolean intersect(Personnage other){
+    public boolean intersect(Personnage other) {
         double dx = this.xCoordinate - other.xCoordinate;
         double dy = this.yCoordinate - other.yCoordinate;
-        double dCarre = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+        double dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
 
-        return dCarre < this.radius+other.radius;
+        return dCarre < Math.pow(this.rayon + other.rayon, 2);
     }
 }

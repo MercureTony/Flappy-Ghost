@@ -1,24 +1,27 @@
 public class Obstacle extends Personnage {
-    private int radius;
+
     public static final int NBR_IMAGES = 46;
+
+    private int imageIndex;
 
     /**
      * Constructeur des Obstacle
      *
-     * @param x abscisse de l'ennemie
-     * @param y ordonnnéé de l'ennemie
+     * @param x abscisse de l'obstacle
+     * @param y ordonnnéé de l'obstacle
      */
     public Obstacle(int x, int y) {
         super(x, y);
+        this.imageIndex = (int) Math.random() * NBR_IMAGES;
     }
 
     /**
-     * Cette méthode permet d'afficher aléatoirement les Obstacle du jeu
+     * Cette méthode permet d'afficher aléatoirement les obstacles du jeu
      *
      * @return l'identifiant de l'image
      */
     public int getImageIndex() {
-        return (int) Math.floor(Math.random() * NBR_IMAGES);
+        return this.imageIndex;
     }
 
     /**
@@ -28,17 +31,13 @@ public class Obstacle extends Personnage {
      */
 
     @Override
-    public int getRadius() throws NullPointerException {
-        if (radius == 0) {
-            throw new NullPointerException("Le rayon n'a pas été défini");
-        }
-        return radius;
+    public int getRayon() {
+        if (rayon == 0) { this.setRayon(); }
+        return rayon;
     }
 
-    public void setRadius() {
-        this.radius = (int) Math.floor(Math.random() * NBR_IMAGES);
-        if (this.radius < 10){
-            radius = 10;
-        }
+    public void setRayon() {
+        this.rayon = (int) Math.random() * NBR_IMAGES;
+        if (this.rayon < 10) { this.rayon = 10; }
     }
 }

@@ -1,5 +1,6 @@
 public class Flappy extends Personnage {
-    public static final int radius = 30;
+    public static final int rayon = 30;
+
     // Vitesse de 120 px/s en ordonnée au début du jeu
     private int vy = 120;
     private int vx = 0;
@@ -17,8 +18,8 @@ public class Flappy extends Personnage {
      * @param x abscisse de Flappy
      * @param y ordonnée de Flappy
      */
-    public Flappy(int x, int y){
-        super(x,y);
+    public Flappy(int x, int y) {
+        super(x, y);
     }
 
     /**
@@ -26,16 +27,14 @@ public class Flappy extends Personnage {
      * @return le score actuel à l'instant t
      */
     public int getScore() {
-        return score;
+        return this.score;
     }
 
     /**
-     * Modifie le score
-     *
-     * @param score
+     * Incrémente le score
      */
-    public void setScore(int score) {
-        this.score = score;
+    public void incrementScore() {
+        this.score++;
     }
 
     /**
@@ -43,7 +42,7 @@ public class Flappy extends Personnage {
      * @return la vitesse en abscisse
      */
     public int getVx() {
-        return vx;
+        return this.vx;
     }
 
     /**
@@ -60,7 +59,7 @@ public class Flappy extends Personnage {
      * @return la vitesse en ordonnée
      */
     public int getVy() {
-        return vy;
+        return this.vy;
     }
 
     /**
@@ -77,7 +76,16 @@ public class Flappy extends Personnage {
      * @return l'accélération en abscisse
      */
     public int getAx() {
-        return ax;
+        return this.ax;
+    }
+
+    /**
+     * Modifie l'accélération en ordonnée
+     *
+     * @param ax
+     */
+    public void setAy(int ax) {
+        this.ay = ax;
     }
 
     /**
@@ -85,7 +93,7 @@ public class Flappy extends Personnage {
      * @return l'accélération en ordonnée
      */
     public int getAy() {
-        return ay;
+        return this.ay;
     }
 
     /**
@@ -98,24 +106,24 @@ public class Flappy extends Personnage {
     }
 
     /**
-     * Méthode qui permet de c'augmenter la vitesse/accélération après deux Obstacle dépassés
+     * Méthode qui permet de c'augmenter la vitesse/accélération après deux obstacles dépassés
      *
      */
-    public void update(){
-        vy += 15;
-        ay += 15;
-        if (vy > 300){
-            vy = 300;
+    public void update() {
+        this.vy += 15;
+        this.ay += 15;
+        if (this.vy > 300) {
+            this.vy = 300;
         }
     }
 
     /**
-     * Cette méthode permet d'augmnenter la vitesse à 300px/s quand le fantôme saute
+     * Augmnenter la vitesse à 300px/s quand le fantôme saute
      *
      * @return La vitesse (300px/s) du fantôme quand il saute
      */
-    public int jump(){
-        return vx = 300;
+    public int jump() {
+        this.vx = 300;
     }
 
     /**
@@ -125,9 +133,9 @@ public class Flappy extends Personnage {
      */
     public void testIntersect(Personnage other) {
         if (intersect(other)) {
-            setScore(0);
-            setVy(120);
-            setAy(500);
+            this.score = 0;
+            this.setVy(120);
+            this.setAy(500);
         }
     }
 }
