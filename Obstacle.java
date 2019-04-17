@@ -1,21 +1,19 @@
-package sample;
-
-public class Obstacles extends Personnage {
+public class Obstacle extends Personnage {
     private int radius;
     public static final int NBR_IMAGES = 46;
 
     /**
-     * Constructeur des obstacles
+     * Constructeur des Obstacle
      *
      * @param x abscisse de l'ennemie
      * @param y ordonnnéé de l'ennemie
      */
-    public Obstacles(int x, int y) {
+    public Obstacle(int x, int y) {
         super(x, y);
     }
 
     /**
-     * Cette méthode permet d'afficher aléatoirement les obstacles du jeu
+     * Cette méthode permet d'afficher aléatoirement les Obstacle du jeu
      *
      * @return l'identifiant de l'image
      */
@@ -24,7 +22,7 @@ public class Obstacles extends Personnage {
     }
 
     /**
-     * Cette méthode permet de générer des rayons aléatoirement pour chaque obstacles
+     * Cette méthode permet de générer des rayons aléatoirement pour chaque Obstacle
      *
      * @return le rayon de l'obstacle
      */

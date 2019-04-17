@@ -1,5 +1,3 @@
-package sample;
-
 public abstract class Personnage {
     protected double xCoordinate;
     protected double yCoordinate;

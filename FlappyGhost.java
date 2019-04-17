@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +34,7 @@ public class FlappyGhost extends Application {
     Separator[] separator = new Separator[2];
     final int MAX_WIDTH = 640;
     final int MAX_HEIGHT = 440;
-    String path = "file:src/sample/images/";
+    String path = "file:images/";
     // Flappy
     Flappy flappy = new Flappy(340,400);
 
@@ -58,10 +56,10 @@ public class FlappyGhost extends Application {
         // Load images
         Image bg = new Image(path+"bg.png");
         Image ghost = new Image(path+"ghost.png");
-        Image[] obstacle = new Image[Obstacles.NBR_IMAGES];
+        Image[] obstacle = new Image[Obstacle.NBR_IMAGES];
 
-        // Load obstacles
-        for (int i = 0; i < Obstacles.NBR_IMAGES; i++){
+        // Load Obstacle
+        for (int i = 0; i < Obstacle.NBR_IMAGES; i++){
             obstacle[i] = new Image(path+i+".png");
         }
 

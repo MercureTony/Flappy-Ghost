@@ -1,5 +1,3 @@
-package sample;
-
 public class Flappy extends Personnage {
     public static final int radius = 30;
     // Vitesse de 120 px/s en ordonnée au début du jeu
@@ -100,7 +98,7 @@ public class Flappy extends Personnage {
     }
 
     /**
-     * Méthode qui permet de c'augmenter la vitesse/accélération après deux obstacles dépassés
+     * Méthode qui permet de c'augmenter la vitesse/accélération après deux Obstacle dépassés
      *
      */
     public void update(){
@@ -123,7 +121,7 @@ public class Flappy extends Personnage {
     /**
      * Vérifie si Flappy intersecte un obstacle, si oui, réinitialise son compteur
      * 
-     * @param other qui représente les obstacles
+     * @param other qui représente les Obstacle
      */
     public void testIntersect(Personnage other) {
         if (intersect(other)) {
