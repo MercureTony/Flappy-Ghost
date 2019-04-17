@@ -24,8 +24,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
-import java.awt.*;
-
 public class FlappyGhost extends Application {
 
     final int MAX_WIDTH = 640;
