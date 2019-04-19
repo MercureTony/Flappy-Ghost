@@ -4,15 +4,19 @@ public class Obstacle extends Personnage {
 
     private int imageIndex;
 
+    protected long lastT = 0; // Dernier temps utilisé
+
     /**
      * Constructeur des Obstacle
      *
      * @param x abscisse de l'obstacle
      * @param y ordonnnéé de l'obstacle
+     * @param t Temps de création
      */
-    public Obstacle(int x, int y) {
+    public Obstacle(int x, int y, long t) {
         super(x, y);
         this.imageIndex = (int) Math.random() * NBR_IMAGES;
+        this.lastT = t;
     }
 
     /**
@@ -39,5 +43,14 @@ public class Obstacle extends Personnage {
     public void setRayon() {
         this.rayon = (int) Math.random() * NBR_IMAGES;
         if (this.rayon < 10) { this.rayon = 10; }
+    }
+
+    /**
+     * Déplacer l'obstacle avec une règle par le temps
+     *
+     * @param t Temps actuel
+     */
+    public void move(long t) {
+        this.lastT = t;
     }
 }

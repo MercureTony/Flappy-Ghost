@@ -1,30 +1,32 @@
 public abstract class Personnage {
 
-    protected int xCoordinate;
-    protected int yCoordinate;
+    protected int x;
+    protected int y;
     protected int rayon;
+
+    protected int vy; // Vitesse en y (px/s)
 
     /**
      * Constructeur du Personnage
      *
-     * @param xCoordinate abscisse du Personnage
-     * @param yCoordinate ordonnée du Personnage
+     * @param x abscisse du Personnage
+     * @param y ordonnée du Personnage
      */
-    public Personnage(int xCoordinate, int yCoordinate) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public Personnage(int x, int y, int t) {
+        this.x = x;
+        this.y = y;
     }
 
     /**
      * Constructeur du Personnage
      *
-     * @param xCoordinate abscisse du Personnage
-     * @param yCoordinate ordonnée du Personnage
+     * @param x abscisse du Personnage
+     * @param y ordonnée du Personnage
      * @param rayon La grandeur du personnage
      */
-    public Personnage(int xCoordinate, int yCoordinate, int rayon) {
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
+    public Personnage(int x, int y, int rayon) {
+        this.x = x;
+        this.y = y;
         this.rayon = rayon;
     }
 
@@ -40,16 +42,16 @@ public abstract class Personnage {
      *
      * @return retourne l'abscisse
      */
-    public int getXCoordinate() {
-        return this.xCoordinate;
+    public int getX() {
+        return this.x;
     }
 
     /**
      *
      * @return retourne l'ordonnée
      */
-    public int getYCoordinate() {
-        return this.yCoordinate;
+    public int getY() {
+        return this.y;
     }
 
     /**
@@ -64,19 +66,19 @@ public abstract class Personnage {
     /**
      * Modifie l'abscisse du Personnage
      *
-     * @param xCoordinate la nouvelle abscisse
+     * @param x la nouvelle abscisse
      */
-    public void setXCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
+    public void setX(int x) {
+        this.x = x;
     }
 
     /**
      * Modifie l'ordonnée du Personnage
      *
-     * @param yCoordinate la nouvelle ordonnée
+     * @param y la nouvelle ordonnée
      */
-    public void setYCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
+    public void setY(int y) {
+        this.y = y;
     }
 
     /**
@@ -86,8 +88,8 @@ public abstract class Personnage {
      * @return un booléen qui vérifie la collision
      */
     public boolean intersect(Personnage other) {
-        int dx = this.xCoordinate - other.xCoordinate;
-        int dy = this.yCoordinate - other.yCoordinate;
+        int dx = this.x - other.x;
+        int dy = this.y - other.y;
         int dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
 
         return dCarre < Math.pow(this.rayon + other.rayon, 2);

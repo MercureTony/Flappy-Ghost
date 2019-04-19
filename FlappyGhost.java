@@ -30,7 +30,7 @@ public class FlappyGhost extends Application {
     final int MAX_HEIGHT = 440;
 
     // Controleur
-    Controleur controleur = new Controleur();
+    Controleur controleur = new Controleur(this);
 
     // Components of the window
     Button pause;

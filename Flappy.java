@@ -1,10 +1,8 @@
 public class Flappy extends Personnage {
 
-    // Vitesse de 120 px/s en ordonnée au début du jeu
-    private int vy = 120;
-    private int vx = 0;
+    private int vx = 0; // Vitesse en x
 
-    // Gravité (en accélération) au début du jeu
+    // Gravité px/s^2
     private int ax = 0;
     private int ay = 500;
 
@@ -20,6 +18,7 @@ public class Flappy extends Personnage {
     public Flappy(int x, int y) {
         // Rayon de 30px
         super(x, y, 30);
+        this.vy = 120;
     }
 
     /**
