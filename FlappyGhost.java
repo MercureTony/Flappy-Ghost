@@ -44,8 +44,6 @@ public class FlappyGhost extends Application {
         Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
 
         // Load images
-        Image bg = new Image(path + "bg.png");
-        Image ghost = new Image(path + "ghost.png");
         Image[] obstacle = new Image[Obstacle.NBR_IMAGES];
 
         // Load Obstacles
@@ -59,7 +57,9 @@ public class FlappyGhost extends Application {
         Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
         pane.getChildren().add(gameScene);
         GraphicsContext context = gameScene.getGraphicsContext2D();
-        context.drawImage(bg, 0, 0);
+
+        // L'arrière-plan
+        context.drawImage(new Image(path + "bg.png"), 0, 0);
 
         // Separator
         for (int i = 0; i < separator.length; i++){
@@ -85,6 +85,7 @@ public class FlappyGhost extends Application {
         root.getChildren().add(1,menu);
 
         // Instancier image du fantome
+        Image ghost = new Image(path + "ghost.png");
         ImageView fantomeView = new ImageView(ghost);
         fantomeView.setX(FlappyGhost.MAX_WIDTH / 2.0);
         fantomeView.setY(FlappyGhost.GAME_HEIGHT / 2.0);
@@ -102,20 +103,37 @@ public class FlappyGhost extends Application {
             gameScene.requestFocus();
         });
 
+        // Threads du jeu
         scene.setOnKeyPressed(e -> {
             // Sortir du jeu
             if (e.getCode() == KeyCode.ESCAPE) {
                 Platform.exit();
             }
+            // Faire sauter
             if (e.getCode() == KeyCode.SPACE) {
                 controleur.sauterFantome(fantomeView);
             }
         });
 
-        Platform.runLater(() -> {
-            controleur.jouer();
+        // Activer déroulement de l'arrière-plan
+        Thread derouleur = new Thread(() -> {
+            controleur.deroulerPlan();
         });
+        derouleur.start();
 
+        // Activer la gravité pour Flappy
+        Thread gravite = new Thread(() -> {
+            controleur.faireGravite();
+        });
+        gravite.start();
+
+        // Ajouter des monstres
+        Thread creerMonstres = new Thread(() -> {
+            controleur.creerMonstres();
+        })
+        creerMonstres.start();
+
+        // Dernières modifications à la scène
         primaryStage.setTitle("Flappy Ghost");
         primaryStage.setScene(scene);
 
