@@ -142,6 +142,11 @@ public class FlappyGhost extends Application {
         });
     }
 
+    public void changerScore(String newScore) {
+        Platform.runLater(() -> {
+            score.setText(newScore);
+        });
+    }
 
     public static void main(String[] args) {
         launch(args);
