@@ -1,13 +1,10 @@
-import javafx.application.Application;
-import javafx.scene.image.ImageView;
-
 public class Controleur {
 
 	private Flappy fantome = new Flappy(FlappyGhost.MAX_WIDTH / 2, FlappyGhost.GAME_HEIGHT / 2);
 
-	private Application app;
+	private FlappyGhost app;
 
-    public Controleur(Application app) {
+    public Controleur(FlappyGhost app) {
     	this.app = app;
     }
 
@@ -16,10 +13,9 @@ public class Controleur {
      *
      * Se fait quand la touche 'espace' est faite
      */
-    public void sauterFantome(ImageView img) {
+    public void sauterFantome() {
         fantome.jump();
-        img.setX(fantome.getX());
-        img.setY(fantome.getY());
+        app.moveGhost(fantome.getX(), fantome.getY());
     }
 
     /**

@@ -29,12 +29,20 @@ public class FlappyGhost extends Application {
     private Controleur controleur = new Controleur(this);
 
     // Components of the window
-    Button pause;
-    CheckBox debug;
+    Button pause = new Button("Pause");
+    CheckBox debug = new CheckBox("Mode debug");
     Separator[] separator = new Separator[2];
-    Text score;
+    Text scoreLabel = new Text("Score : ");
+    Text score = new Text("");
 
     String path = "file:images/";
+
+    // Instancier image du fantome
+    Image ghost = new Image(path + "ghost.png");
+    ImageView fantomeView = new ImageView(ghost);
+
+    // Load images
+    Image[] obstacles = new Image[Obstacle.NBR_IMAGES];
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,14 +50,6 @@ public class FlappyGhost extends Application {
         // Platform design
         VBox root = new VBox();
         Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
-
-        // Load images
-        Image[] obstacle = new Image[Obstacle.NBR_IMAGES];
-
-        // Load Obstacles
-        for (int i = 0; i < Obstacle.NBR_IMAGES; i++){
-            obstacle[i] = new Image(path + i + ".png");
-        }
 
         // Background scene
         Pane pane = new Pane();
@@ -73,20 +73,14 @@ public class FlappyGhost extends Application {
         menu.setAlignment(Pos.CENTER);
         menu.setPadding(new Insets(0, 0, 0, 5));
 
-        pause = new Button("Pause");
-        debug = new CheckBox("Mode debug");
-        score = new Text("Score :");
-
         menu.getChildren().add(pause);
         menu.getChildren().add(separator[0]);
         menu.getChildren().add(debug);
         menu.getChildren().add(separator[1]);
+        menu.getChildren().add(scoreLabel);
         menu.getChildren().add(score);
-        root.getChildren().add(1,menu);
+        root.getChildren().add(1, menu);
 
-        // Instancier image du fantome
-        Image ghost = new Image(path + "ghost.png");
-        ImageView fantomeView = new ImageView(ghost);
         fantomeView.setX(FlappyGhost.MAX_WIDTH / 2.0);
         fantomeView.setY(FlappyGhost.GAME_HEIGHT / 2.0);
         pane.getChildren().add(fantomeView);
@@ -111,7 +105,7 @@ public class FlappyGhost extends Application {
             }
             // Faire sauter
             if (e.getCode() == KeyCode.SPACE) {
-                controleur.sauterFantome(fantomeView);
+                controleur.sauterFantome();
             }
         });
 
@@ -130,7 +124,7 @@ public class FlappyGhost extends Application {
         // Ajouter des monstres
         Thread creerMonstres = new Thread(() -> {
             controleur.creerMonstres();
-        })
+        });
         creerMonstres.start();
 
         // Dernières modifications à la scène
@@ -139,6 +133,13 @@ public class FlappyGhost extends Application {
 
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    public void moveGhost(double x, double y) {
+        Platform.runLater(() -> {
+            fantomeView.setX(x);
+            fantomeView.setY(y);
+        });
     }
 
 
