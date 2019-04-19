@@ -1,11 +1,8 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,20 +14,19 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
 public class FlappyGhost extends Application {
 
-    final int MAX_WIDTH = 640;
-    final int MAX_HEIGHT = 440;
+    // px
+    public static final int MAX_WIDTH = 640;
+    public static final int MAX_HEIGHT = 440;
+    public static final int GAME_HEIGHT = 400;
 
     // Controleur
-    Controleur controleur = new Controleur(this);
+    private Controleur controleur = new Controleur(this);
 
     // Components of the window
     Button pause;
@@ -60,11 +56,9 @@ public class FlappyGhost extends Application {
         // Background scene
         Pane pane = new Pane();
         root.getChildren().add(pane);
-        Canvas gameScene = new Canvas(MAX_WIDTH, 400);
+        Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
         pane.getChildren().add(gameScene);
         GraphicsContext context = gameScene.getGraphicsContext2D();
-        ImageView imgView = new ImageView();
-        imgView.setImage(bg);
         context.drawImage(bg, 0, 0);
 
         // Separator
@@ -90,6 +84,12 @@ public class FlappyGhost extends Application {
         menu.getChildren().add(score);
         root.getChildren().add(1,menu);
 
+        // Instancier image du fantome
+        ImageView fantomeView = new ImageView(ghost);
+        fantomeView.setX(FlappyGhost.MAX_WIDTH / 2.0);
+        fantomeView.setY(FlappyGhost.GAME_HEIGHT / 2.0);
+        pane.getChildren().add(fantomeView);
+
         /* Après l’exécution de la fonction, le
            focus va automatiquement au canvas */
         Platform.runLater(() -> {
@@ -100,6 +100,20 @@ public class FlappyGhost extends Application {
            le focus retourne sur le canvas */
         scene.setOnMouseClicked((event) -> {
             gameScene.requestFocus();
+        });
+
+        scene.setOnKeyPressed(e -> {
+            // Sortir du jeu
+            if (e.getCode() == KeyCode.ESCAPE) {
+                Platform.exit();
+            }
+            if (e.getCode() == KeyCode.SPACE) {
+                controleur.sauterFantome(fantomeView);
+            }
+        });
+
+        Platform.runLater(() -> {
+            controleur.jouer();
         });
 
         primaryStage.setTitle("Flappy Ghost");

@@ -66,8 +66,8 @@ public class Flappy extends Personnage {
      *
      * @param ax
      */
-    public void setAy(int ax) {
-        this.ay = ax;
+    public void setAx(int ax) {
+        this.ax = ax;
     }
 
     /**
@@ -101,10 +101,8 @@ public class Flappy extends Personnage {
 
     /**
      * Augmnenter la vitesse à 300px/s quand le fantôme saute
-     *
-     * @return La vitesse (300px/s) du fantôme quand il saute
      */
-    public int jump() {
+    public void jump() {
         this.vx = 300;
     }
 
