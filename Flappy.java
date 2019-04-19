@@ -38,23 +38,6 @@ public class Flappy extends Personnage {
 
     /**
      *
-     * @return la vitesse en abscisse
-     */
-    public int getVx() {
-        return this.vx;
-    }
-
-    /**
-     * Modifie la vitesse en abscisse
-     *
-     * @param vx
-     */
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    /**
-     *
      * @return la vitesse en ordonnée
      */
     public int getVy() {

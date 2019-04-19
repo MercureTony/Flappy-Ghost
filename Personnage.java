@@ -82,6 +82,23 @@ public abstract class Personnage {
     }
 
     /**
+     *
+     * @return la vitesse en abscisse
+     */
+    public int getVx() {
+        return this.vx;
+    }
+
+    /**
+     * Modifie la vitesse en abscisse
+     *
+     * @param vx
+     */
+    public void setVx(int vx) {
+        this.vx = vx;
+    }
+
+    /**
      * Méthode qui permet de verifier si deux Personnage s'intersecte
      *
      * @param other qui l'autre Personnage avec qui ont vérfie l'intersection

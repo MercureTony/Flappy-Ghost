@@ -1,10 +1,9 @@
 public class ObstacleSinus extends Obstacle {
 
-	private int initialY;
+	private static final int AMPLITUDE = 50; // px
 
 	public ObstacleSinus(int x, int y, long t) {
 		super(x, y, t);
-		this.initialY = y;
 	}
 
 	/**
@@ -14,6 +13,6 @@ public class ObstacleSinus extends Obstacle {
 	 */
 	@Override
 	public void move(long t) {
-		
+		this.y = AMPLITUDE / 2 * Math.sin(this.x);
 	}
 }

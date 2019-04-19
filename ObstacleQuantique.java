@@ -2,8 +2,8 @@ public class ObstacleQuantique extends Obstacle {
 
 	private int lastTeleport = 0;
 
-	private static long TELEPORT_INCREMENT = 2e8; // ns
-	private static int MAX_TELEPORT = 30; // px
+	private static final long TELEPORT_INCREMENT = 2e8; // ns
+	private static final int MAX_TELEPORT = 30; // px
 
 	public ObstacleQuantique(int x, int y, long t) {
 		super(x, y, t);
@@ -16,8 +16,7 @@ public class ObstacleQuantique extends Obstacle {
 	 */
 	@Override
 	public void move(long t) {
-		int timeDelta = (int) t - this.lastT;
-		this.x = this.x + timeDelta * this.vx;
+		super(t);
 		if (t - lastTeleport >= TELEPORT_INCREMENT) {
 			int negX = Math.round(Math.random()) == 0 ? -1 : 1;
 			int negY = Math.round(Math.random()) == 0 ? -1 : 1;
@@ -26,6 +25,5 @@ public class ObstacleQuantique extends Obstacle {
 			this.y += negY * Math.floor(Math.random() * MAX_TELEPORT);
 			this.lastTeleport = t;
 		}
-		super(t);
 	}
 }
