@@ -1,6 +1,6 @@
 public class Flappy extends Personnage {
 
-    private int vx = 0; // Vitesse en x
+    private int vy = 0; // Vitesse en x
 
     // Gravité px/s^2
     private int ax = 0;

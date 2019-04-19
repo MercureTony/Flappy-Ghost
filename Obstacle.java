@@ -51,7 +51,7 @@ public class Obstacle extends Personnage {
      * @param t Temps actuel
      */
     public void move(long t) {
-        int timeDelta = (int) (t - this.lastT) / 1e9; // ns -> s
+        int timeDelta = (int) ((t - this.lastT) / 1e9); // ns -> s
         this.x -= timeDelta * this.vx;
         this.lastT = t;
     }

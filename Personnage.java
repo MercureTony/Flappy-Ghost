@@ -4,7 +4,7 @@ public abstract class Personnage {
     protected int y;
     protected int rayon;
 
-    protected int vy; // Vitesse en y (px/s)
+    protected int vx; // Vitesse en x (px/s)
 
     /**
      * Constructeur du Personnage
@@ -12,7 +12,7 @@ public abstract class Personnage {
      * @param x abscisse du Personnage
      * @param y ordonnée du Personnage
      */
-    public Personnage(int x, int y, int t) {
+    public Personnage(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -107,7 +107,7 @@ public abstract class Personnage {
     public boolean intersect(Personnage other) {
         int dx = this.x - other.x;
         int dy = this.y - other.y;
-        int dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
+        double dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
 
         return dCarre < Math.pow(this.rayon + other.rayon, 2);
     }
