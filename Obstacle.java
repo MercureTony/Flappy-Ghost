@@ -4,19 +4,15 @@ public class Obstacle extends Personnage {
 
     private int imageIndex;
 
-    protected long lastT = 0; // Dernier temps utilisé
-
     /**
      * Constructeur des Obstacle
      *
      * @param x abscisse de l'obstacle
      * @param y ordonnnéé de l'obstacle
-     * @param t Temps de création
      */
-    public Obstacle(int x, int y, long t) {
+    public Obstacle(int x, int y) {
         super(x, y);
         this.imageIndex = (int) Math.random() * NBR_IMAGES;
-        this.lastT = t;
     }
 
     /**
@@ -50,9 +46,7 @@ public class Obstacle extends Personnage {
      *
      * @param t Temps actuel
      */
-    public void move(long t) {
-        int timeDelta = (int) ((t - this.lastT) / 1e9); // ns -> s
-        this.x -= timeDelta * this.vx;
-        this.lastT = t;
+    public void move(double dt) {
+        this.x -= dt * this.vx;
     }
 }

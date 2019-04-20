@@ -1,3 +1,4 @@
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -109,30 +110,41 @@ public class FlappyGhost extends Application {
             }
         });
 
-        // Activer déroulement de l'arrière-plan
-        Thread derouleur = new Thread(() -> {
-            controleur.deroulerPlan();
-        });
-        derouleur.start();
-
-        // Activer la gravité pour Flappy
-        Thread gravite = new Thread(() -> {
-            controleur.faireGravite();
-        });
-        gravite.start();
-
-        // Ajouter des monstres
-        Thread creerMonstres = new Thread(() -> {
-            controleur.creerMonstres();
-        });
-        creerMonstres.start();
-
         // Dernières modifications à la scène
         primaryStage.setTitle("Flappy Ghost");
         primaryStage.setScene(scene);
 
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        AnimationTimer mouvements = new AnimationTimer() {
+            private long lastTime = 0; // ns
+            private double x = 0, y = 150;
+
+            @Override
+            public void start() {
+                lastTime = System.nanoTime();
+                super.start();
+            }
+
+            @Override
+            public void handle(long now) {
+                double deltaTime = (now - lastTime) * 1e-9; // s
+
+                // Activer déroulement de l'arrière-plan
+                controleur.deroulerPlan(deltaTime);
+
+                // Activer la gravité pour Flappy
+                controleur.faireGravite(deltaTime);
+
+                // Déplacer les monstres
+                controleur.bougerMonstres(deltaTime);
+
+                // Créer des monstres
+                controleur.creerMonstres(deltaTime);
+            }
+        };
+        movements.start();
     }
 
     public void moveGhost(double x, double y) {

@@ -1,23 +1,25 @@
 public class ObstacleQuantique extends Obstacle {
 
-	private long lastTeleport = 0;
+	private double teleportTime = 0; // Accumulateur de temps à l'incrément
 
-	private static final long TELEPORT_INCREMENT = 2e8; // ns
 	private static final int MAX_TELEPORT = 30; // px
+	private static final double TELEPORT_INCREMENT = 0.2 // s
 
-	public ObstacleQuantique(int x, int y, long t) {
-		super(x, y, t);
+	public ObstacleQuantique(int x, int y) {
+		super(x, y);
 	}
 
 	/**
 	 * Déplacer le personnage à chaque 0.2s à une position aléatoire
 	 *
-	 * @param t Temps actuel
+	 * @param dt Delta de temps
 	 */
 	@Override
-	public void move(long t) {
-		super(t);
-		if (t - lastTeleport >= TELEPORT_INCREMENT) {
+	public void move(double dt) {
+		super(dt);
+
+		teleportTime += dt;
+		if (teleportTime >= TELEPORT_INCREMENT) {
 			int negX = Math.round(Math.random()) == 0 ? -1 : 1;
 			int negY = Math.round(Math.random()) == 0 ? -1 : 1;
 
