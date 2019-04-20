@@ -5,7 +5,7 @@ public class ObstacleQuantique extends Obstacle {
 	private static final int MAX_TELEPORT = 30; // px
 	private static final double TELEPORT_INCREMENT = 0.2 // s
 
-	public ObstacleQuantique(int x, int y) {
+	public ObstacleQuantique(double x, double y) {
 		super(x, y);
 	}
 
@@ -23,9 +23,8 @@ public class ObstacleQuantique extends Obstacle {
 			int negX = Math.round(Math.random()) == 0 ? -1 : 1;
 			int negY = Math.round(Math.random()) == 0 ? -1 : 1;
 
-			this.x += negX * (int) (Math.random() * MAX_TELEPORT);
-			this.y += negY * (int) (Math.random() * MAX_TELEPORT);
-			this.lastTeleport = t;
+			this.x += negX * Math.random() * MAX_TELEPORT;
+			this.y += negY * Math.random() * MAX_TELEPORT;
 		}
 	}
 }

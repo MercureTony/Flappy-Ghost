@@ -10,7 +10,7 @@ public class Obstacle extends Personnage {
      * @param x abscisse de l'obstacle
      * @param y ordonnnéé de l'obstacle
      */
-    public Obstacle(int x, int y) {
+    public Obstacle(double x, double y) {
         super(x, y);
         this.imageIndex = (int) Math.random() * NBR_IMAGES;
     }

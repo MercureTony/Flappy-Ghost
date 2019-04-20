@@ -1,6 +1,6 @@
 public class ObstacleStatique extends Obstacle {
 
-	public ObstacleStatique(int x, int y) {
+	public ObstacleStatique(double x, double y) {
 		super(x, y);
 	}
 }

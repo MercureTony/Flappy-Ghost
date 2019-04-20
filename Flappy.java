@@ -15,7 +15,7 @@ public class Flappy extends Personnage {
      * @param x abscisse de Flappy initial
      * @param y ordonnée de Flappy initial
      */
-    public Flappy(int x, int y) {
+    public Flappy(double x, double y) {
         // Rayon de 30px
         super(x, y, 30);
         this.vy = 120;

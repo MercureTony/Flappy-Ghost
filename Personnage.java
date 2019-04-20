@@ -1,7 +1,7 @@
 public abstract class Personnage {
 
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
     protected int rayon;
 
     protected int vx; // Vitesse en x (px/s)
@@ -12,7 +12,7 @@ public abstract class Personnage {
      * @param x abscisse du Personnage
      * @param y ordonnée du Personnage
      */
-    public Personnage(int x, int y) {
+    public Personnage(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -24,7 +24,7 @@ public abstract class Personnage {
      * @param y ordonnée du Personnage
      * @param rayon La grandeur du personnage
      */
-    public Personnage(int x, int y, int rayon) {
+    public Personnage(double x, double y, int rayon) {
         this.x = x;
         this.y = y;
         this.rayon = rayon;
@@ -42,7 +42,7 @@ public abstract class Personnage {
      *
      * @return retourne l'abscisse
      */
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
@@ -50,7 +50,7 @@ public abstract class Personnage {
      *
      * @return retourne l'ordonnée
      */
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
@@ -68,7 +68,7 @@ public abstract class Personnage {
      *
      * @param x la nouvelle abscisse
      */
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
@@ -77,7 +77,7 @@ public abstract class Personnage {
      *
      * @param y la nouvelle ordonnée
      */
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
