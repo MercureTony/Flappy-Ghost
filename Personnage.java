@@ -105,8 +105,8 @@ public abstract class Personnage {
      * @return un booléen qui vérifie la collision
      */
     public boolean intersect(Personnage other) {
-        int dx = this.x - other.x;
-        int dy = this.y - other.y;
+        double dx = this.x - other.x;
+        double dy = this.y - other.y;
         double dCarre = Math.pow(dx, 2) + Math.pow(dy, 2);
 
         return dCarre < Math.pow(this.rayon + other.rayon, 2);

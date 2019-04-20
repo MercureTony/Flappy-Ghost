@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Controleur {
 
 	private Flappy fantome = new Flappy(FlappyGhost.MAX_WIDTH / 2, FlappyGhost.GAME_HEIGHT / 2);
-	private ArrayList<Obstacle> = new ArrayList<Obstacle>();
+	private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
 	private FlappyGhost app;
 

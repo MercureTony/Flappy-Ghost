@@ -144,7 +144,7 @@ public class FlappyGhost extends Application {
                 controleur.creerMonstres(deltaTime);
             }
         };
-        movements.start();
+        mouvements.start();
     }
 
     public void moveGhost(double x, double y) {
