@@ -84,6 +84,11 @@ public class Controleur {
 				if (fantome.testIntersect(obs)) {
 					app.changerScore(Integer.toString(fantome.getScore()));
 				}
+
+				// Tester si hors de l'écran (x)
+				if (obs.getX() + obs.getRayon() <= 0) {
+					app.enleverObstacle(i);
+				}
 			}
 		}
 	}

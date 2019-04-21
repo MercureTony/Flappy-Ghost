@@ -220,6 +220,12 @@ public class FlappyGhost extends Application {
 		});
 	}
 
+	public void enleverObstacle(int index) {
+		Platform.runLater(() -> {
+			obstacles.remove(index); obstaclesCercles.remove(index);
+		});
+	}
+
 	public void changerScore(String newScore) {
 		Platform.runLater(() -> {
 			score.setText(newScore);
