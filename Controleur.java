@@ -88,7 +88,7 @@ public class Controleur {
 			Obstacle obs = null;
 
 			int initialRayon = (int) (Math.random() * Obstacle.MAX_RAYON + 1);
-        	if (initialRayon < 10) { initialRayon = 10; }
+			if (initialRayon < 10) { initialRayon = 10; }
 
 			double initialX = FlappyGhost.MAX_WIDTH + initialRayon / 2.0;
 			double initialY = Math.random() * FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
