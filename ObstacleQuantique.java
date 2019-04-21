@@ -12,7 +12,7 @@ public class ObstacleQuantique extends Obstacle {
 	/**
 	 * Déplacer le personnage à chaque 0.2s à une position aléatoire
 	 *
-	 * @param dt Delta de temps
+	 * @param dt Delta de temps - s
 	 */
 	@Override
 	public void move(double dt) {

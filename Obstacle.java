@@ -53,23 +53,42 @@ public class Obstacle extends Personnage {
 		this.x -= dt * this.vx;
 	}
 
+	/**
+	 * Si l'obstacle a passé Flappy
+	 * Donc ne devrait pas être re-compté
+	 */
 	public boolean hasPassed() {
 		return this.passed;
 	}
 
+	/**
+	 * Quand il passe Flappy, le marquer et ajouter au score
+	 *
+	 * @param f Le Flappy (pour ajouter au score)
+	 */
 	public void pass(Flappy f) {
 		this.passed = true;
 		f.incrementScore();
 	}
 
+	/**
+	 * S'il intersecte actuelement
+	 */
 	public boolean getIntersecting() {
 		return this.intersecting;
 	}
 
+	/**
+	 * S'il a intersecté auparavant
+	 */
 	public boolean hasIntersected() {
 		return this.hasIntersected;
 	}
 
+	/**
+	 * Actualiser son état d'intersectage
+	 * Son état précédent n'est pas modifié
+	 */
 	public void toggleIntersecting() {
 		this.intersecting = !this.intersecting;
 		this.hasIntersected = true;

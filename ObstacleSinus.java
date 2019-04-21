@@ -2,7 +2,7 @@ public class ObstacleSinus extends Obstacle {
 
 	private static final int AMPLITUDE = 50; // px
 
-	private double yInitial;
+	private double yInitial; // px
 
 	public ObstacleSinus(double x, double y) {
 		super(x, y);
@@ -12,7 +12,7 @@ public class ObstacleSinus extends Obstacle {
 	/**
 	 * Déplacer le personnage avec une onde sinus
 	 *
-	 * @param dt Delta de temps
+	 * @param dt Delta de temps - s
 	 */
 	@Override
 	public void move(double dt) {

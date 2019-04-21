@@ -36,124 +36,98 @@ public abstract class Personnage {
 	}
 
 	/**
-	 * Constructeur nul du Personnage
-	 */
-	public Personnage() {}
-
-	/**
-	 *
-	 * @return le rayon du Personnnage
+	 * @return le rayon du Personnnage - px
 	 */
 	public int getRayon() {
 		return this.rayon;
 	}
 
 	/**
-	 *
-	 * @return retourne l'abscisse
+	 * @return l'abscisse - px
 	 */
 	public double getX() {
 		return this.x;
 	}
 
 	/**
-	 *
-	 * @return retourne l'ordonnée
+	 * @return l'ordonnée - px
 	 */
 	public double getY() {
 		return this.y;
 	}
 
 	/**
-	 * Modifie le rayon
-	 *
-	 * @param rayon qui est le nouveau rayon du Personnage
+	 * @param rayon nouveau rayon - px
 	 */
 	public void setRayon(int rayon) {
 		this.rayon = rayon;
 	}
 
 	/**
-	 * Modifie l'abscisse du Personnage
-	 *
-	 * @param x la nouvelle abscisse
+	 * @param x la nouvelle abscisse - px
 	 */
 	public void setX(double x) {
 		this.x = x;
 	}
 
 	/**
-	 * Modifie l'ordonnée du Personnage
-	 *
-	 * @param y la nouvelle ordonnée
+	 * @param y la nouvelle ordonnée - px
 	 */
 	public void setY(double y) {
 		this.y = y;
 	}
 
 	/**
-	 *
-	 * @return la vitesse en abscisse
+	 * @return la vitesse en abscisse - px/s
 	 */
 	public int getVx() {
 		return this.vx;
 	}
 
 	/**
-	 * Modifie la vitesse en abscisse
-	 *
-	 * @param vx
+	 * @param vx la vitesse en abscisse - px/s
 	 */
 	public void setVx(int vx) {
 		this.vx = vx;
 	}
 
 	/**
-	 *
-	 * @return la vitesse en ordonnée
+	 * @return la vitesse en ordonnée - px/s
 	 */
 	public int getVy() {
 		return this.vy;
 	}
 
 	/**
-	 * Modifie la vitesse en ordonnée
-	 *
-	 * @param vy
+	 * @param vy la vitesse en ordonnée - px/s
 	 */
 	public void setVy(int vy) {
 		this.vy = vy;
 	}
 
 	/**
-	 *
-	 * @return l'accélération en abscisse
+	 * @return l'accélération en abscisse - px/s^2
 	 */
 	public int getAx() {
 		return this.ax;
 	}
 
 	/**
-	 * Modifie l'accélération en ordonnée
-	 *
-	 * @param ax
+	 * @param ax l'accélération en ordonnée - px/s^2
 	 */
 	public void setAx(int ax) {
 		this.ax = ax;
 	}
 
 	/**
-	 *
-	 * @return l'accélération en ordonnée
+	 * @return l'accélération en ordonnée - px/s^2
 	 */
 	public int getAy() {
 		return this.ay;
 	}
 
 	/**
-	 * Modifie l'accélération en ordonnée
-	 *
-	 * @param ay
+	 * @param ay l'accélération en ordonnée - px/s^2
 	 */
 	public void setAy(int ay) {
 		this.ay = ay;

@@ -16,19 +16,13 @@ public class Controleur {
 		this.app = app;
 	}
 
-	private double getXOffset(Personnage p) {
-		return p.getX() - p.getRayon();
-	}
-
-	private double getYOffset(Personnage p) {
-		return p.getY() - p.getRayon();
-	}
-
+	/**
+	 * Créer Flappy au début du jeu
+	 */
 	public void commencer() {
 		fantome.setX((FlappyGhost.MAX_WIDTH - fantome.getRayon()) / 2.0);
 		fantome.setY((FlappyGhost.GAME_HEIGHT - fantome.getRayon()) / 2.0);
-		app.moveGhost(getXOffset(fantome), getYOffset(fantome),
-			fantome.getX(), fantome.getY());
+		app.moveGhost(fantome.getX(), fantome.getY());
 		app.initFlappy(fantome.getRayon());
 	}
 
@@ -38,8 +32,7 @@ public class Controleur {
 	 */
 	public void sauterFantome() {
 		fantome.jump();
-		app.moveGhost(getXOffset(fantome), getYOffset(fantome),
-			fantome.getX(), fantome.getY());
+		app.moveGhost(fantome.getX(), fantome.getY());
 	}
 
 	/**
@@ -71,7 +64,7 @@ public class Controleur {
 			if (obs != null) {
 				// Bouger
 				obs.move(dt);
-				app.moveObstacle(i, getXOffset(obs), getYOffset(obs), obs.getX(), obs.getY());
+				app.moveObstacle(i, obs.getX(), obs.getY());
 
 				// Tester si Flappy l'a passé
 				double dist = obs.getX() + (obs.getRayon() + fantome.getRayon()) / 2.0;
@@ -114,7 +107,7 @@ public class Controleur {
 			double initialX = FlappyGhost.MAX_WIDTH + initialRayon / 2.0;
 			double initialY = Math.random() * FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
 
-			int randomType = (int) (Math.random() * 3);
+			int randomType = (int) (Math.random() * 3); // Nombre de types d'obstacles
 			switch (randomType) {
 				case 0:
 					obs = new ObstacleSinus(initialX, initialY);

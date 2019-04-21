@@ -171,6 +171,22 @@ public class FlappyGhost extends Application {
 		});
 	}
 
+	/**
+	 * Calculer une coordonné par rapport à l'origine
+	 * Nécessaire avec le calcul de position different Image/Cercle
+	 *
+	 * @param c Position par centre du rayon
+	 * @param rayon Le rayon du personnage
+	 */
+	private double getOffset(double c, int rayon) {
+		return c - rayon;
+	}
+
+	/**
+	 * Ajouter image de Flappy
+	 *
+	 * @param rayon de Flappy (30px)
+	 */
 	public void initFlappy(int rayon) {
 		Platform.runLater(() -> {
 			pane.getChildren().add(fantomeView);
@@ -183,33 +199,54 @@ public class FlappyGhost extends Application {
 		});
 	}
 
-	public void moveGhost(double xOrigin, double yOrigin, double x, double y) {
+	/**
+	 * Changer Flappy de position
+	 *
+	 * @param x Position x par centre du bounding cercle
+	 * @param y Position y par centre du bounding cercle
+	 */
+	public void moveGhost(double x, double y) {
 		Platform.runLater(() -> {
-			fantomeView.setX(xOrigin); fantomeView.setY(yOrigin);
+			int rayon = ghostCercle.getRadius();
+			fantomeView.setX(getOffset(x, rayon)); fantomeView.setY(getOffset(y, rayon));
 
 			ghostCercle.setCenterX(x); ghostCercle.setCenterY(y);
 		});
 	}
 
-	public void moveObstacle(int index, double xOrigin, double yOrigin,
-		double x, double y) {
+	/**
+	 * Changer un obstacle de position
+	 *
+	 * @param index La position de l'obstacle dans les arraylist
+	 * @param x Position x par centre du bounding cercle
+	 * @param y Position y par centre du bounding cercle
+	 */
+	public void moveObstacle(int index, double x, double y) {
 		Platform.runLater(() -> {
 			ImageView obs = obstacles.get(index);
 			Circle obsDebug = obstaclesCercles.get(index);
+			int rayon = obsDebug.getRadius();
 
-			obs.setX(xOrigin); obs.setY(yOrigin);
+			obs.setX(getOffset(x, rayon)); obs.setY(getOffset(y, rayon));
 			obsDebug.setCenterX(x); obsDebug.setCenterY(y);
 		});
 	}
 
-	public void ajouterObstacle(double xOrigin, double yOrigin,
-		double x, double y, int rayon, int image) {
+	/**
+	 * Ajouter obstacle au jeu
+	 *
+	 * @param x Position x par centre du bounding cercle
+	 * @param y Position y par centre du bounding cercle
+	 * @param rayon Taille de l'obstacle
+	 * @param image Index de l'image à utiliser
+	 */
+	public void ajouterObstacle(double x, double y, int rayon, int image) {
 		Platform.runLater(() -> {
 			String imageIndex = Integer.toString(image);
 			ImageView obsIcon = new ImageView(new Image(PATH + imageIndex + ".png"));
 			Circle obsCercle = new Circle(x, y, rayon, Color.YELLOW);
 
-			obsIcon.setX(xOrigin); obsIcon.setY(yOrigin);
+			obsIcon.setX(getOffset(x, rayon)); obsIcon.setY(getOffset(y, rayon));
 			obsIcon.setPreserveRatio(true); obsIcon.setFitWidth(rayon * 2);
 
 			obstacles.add(obsIcon); obstaclesCercles.add(obsCercle);
@@ -220,12 +257,25 @@ public class FlappyGhost extends Application {
 		});
 	}
 
+	/**
+	 * Enlèver obstacle des index
+	 *
+	 * @param index La position dans les array de l'obstacle
+	 */
 	public void enleverObstacle(int index) {
 		Platform.runLater(() -> {
 			obstacles.remove(index); obstaclesCercles.remove(index);
 		});
 	}
 
+	/**
+	 * Colourier obstacles par son statut
+	 * S'il intersecte avec Flappy, colourier en rouge
+	 * Sinon, jaune (comme défaut)
+	 *
+	 * @param index L'index de l'obstacle dans les array
+	 * @param intersecting S'il intersecte
+	 */
 	public void colourierIntersection(int index, boolean intersecting) {
 		Platform.runLater(() -> {
 			Circle obs = obstaclesCercles.get(index);
@@ -238,12 +288,21 @@ public class FlappyGhost extends Application {
 		});
 	}
 
+	/**
+	 * Modifier score montrée
+	 *
+	 * @param newScore Nouveau valeur en String
+	 */
 	public void changerScore(String newScore) {
 		Platform.runLater(() -> {
 			score.setText(newScore);
 		});
 	}
 
+	/**
+	 * Mettre en mode debug/normal
+	 * Change tous les personnages en cercles colouriés/images
+	 */
 	public void toggleDebugMode() {
 		Platform.runLater(() -> {
 			debugMode = !debugMode;

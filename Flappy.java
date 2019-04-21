@@ -18,6 +18,7 @@ public class Flappy extends Personnage {
 	}
 
 	/**
+	 * Prendre score actuel
 	 *
 	 * @return score
 	 */
@@ -26,7 +27,7 @@ public class Flappy extends Personnage {
 	}
 
 	/**
-	 * Incrémente le score
+	 * Incrémente le score par une constante
 	 */
 	public void incrementScore() {
 		this.score += SCORE_INCREMENT;
@@ -34,7 +35,6 @@ public class Flappy extends Personnage {
 
 	/**
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
-	 *
 	 */
 	public void update() {
 		this.vy += 15;
@@ -45,14 +45,15 @@ public class Flappy extends Personnage {
 	}
 
 	/**
-	 * Augmnenter la vitesse à 300px/s quand le fantôme saute
+	 * Augmnenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
 		this.vy = 300;
 	}
 
 	/**
-	 * Vérifie si Flappy intersecte un obstacle, si oui, réinitialise son compteur
+	 * Vérifie si Flappy intersecte un obstacle
+	 * Si oui, réinitialise son compteur
 	 * 
 	 * @param other qui représente les Obstacle
 	 * @return boolean if intersects
