@@ -178,7 +178,7 @@ public class FlappyGhost extends Application {
 	 * @param c Position par centre du rayon
 	 * @param rayon Le rayon du personnage
 	 */
-	private double getOffset(double c, int rayon) {
+	private double getOffset(double c, double rayon) {
 		return c - rayon;
 	}
 
@@ -207,7 +207,7 @@ public class FlappyGhost extends Application {
 	 */
 	public void moveGhost(double x, double y) {
 		Platform.runLater(() -> {
-			int rayon = ghostCercle.getRadius();
+			double rayon = ghostCercle.getRadius();
 			fantomeView.setX(getOffset(x, rayon)); fantomeView.setY(getOffset(y, rayon));
 
 			ghostCercle.setCenterX(x); ghostCercle.setCenterY(y);
@@ -225,7 +225,7 @@ public class FlappyGhost extends Application {
 		Platform.runLater(() -> {
 			ImageView obs = obstacles.get(index);
 			Circle obsDebug = obstaclesCercles.get(index);
-			int rayon = obsDebug.getRadius();
+			double rayon = obsDebug.getRadius();
 
 			obs.setX(getOffset(x, rayon)); obs.setY(getOffset(y, rayon));
 			obsDebug.setCenterX(x); obsDebug.setCenterY(y);
