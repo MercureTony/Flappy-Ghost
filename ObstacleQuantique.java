@@ -3,7 +3,7 @@ public class ObstacleQuantique extends Obstacle {
 	private double teleportTime = 0; // Accumulateur de temps à l'incrément
 
 	private static final int MAX_TELEPORT = 30; // px
-	private static final double TELEPORT_INCREMENT = 0.2 // s
+	private static final double TELEPORT_INCREMENT = 0.2; // s
 
 	public ObstacleQuantique(double x, double y) {
 		super(x, y);
@@ -16,7 +16,7 @@ public class ObstacleQuantique extends Obstacle {
 	 */
 	@Override
 	public void move(double dt) {
-		super(dt);
+		super.move(dt);
 
 		teleportTime += dt;
 		if (teleportTime >= TELEPORT_INCREMENT) {

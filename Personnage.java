@@ -1,7 +1,7 @@
 public abstract class Personnage {
 
-    protected double x;
-    protected double y;
+    protected double x; // Du centre - px
+    protected double y; // Du centre - px
     protected int rayon;
 
     protected int vx; // Vitesse en x (px/s)
@@ -29,6 +29,11 @@ public abstract class Personnage {
         this.y = y;
         this.rayon = rayon;
     }
+
+    /**
+     * Constructeur nul du Personnage
+     */
+    public Personnage() {}
 
     /**
      *

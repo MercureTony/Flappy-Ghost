@@ -1,6 +1,7 @@
 public class Obstacle extends Personnage {
 
     public static final int NBR_IMAGES = 46;
+    public static final int MAX_RAYON = 45;
 
     private int imageIndex;
 
@@ -12,7 +13,7 @@ public class Obstacle extends Personnage {
      */
     public Obstacle(double x, double y) {
         super(x, y);
-        this.imageIndex = (int) Math.random() * NBR_IMAGES;
+        this.imageIndex = (int) (Math.random() * NBR_IMAGES);
     }
 
     /**
@@ -32,13 +33,11 @@ public class Obstacle extends Personnage {
 
     @Override
     public int getRayon() {
-        if (rayon == 0) { this.setRayon(); }
         return rayon;
     }
 
-    public void setRayon() {
-        this.rayon = (int) Math.random() * NBR_IMAGES;
-        if (this.rayon < 10) { this.rayon = 10; }
+    public void setRayon(int rayon) {
+        this.rayon = rayon;
     }
 
     /**

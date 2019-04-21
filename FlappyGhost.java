@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.shape.Circle;
@@ -48,6 +49,8 @@ public class FlappyGhost extends Application {
 
     private static final String PATH = "file:images/";
 
+    private boolean debugMode = false;
+
     // Instancier image du fantome
     Image ghost = new Image(PATH + "ghost.png");
     ImageView fantomeView = new ImageView(ghost);
@@ -57,8 +60,35 @@ public class FlappyGhost extends Application {
     private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
     private ArrayList<Circle> obstaclesCercles = new ArrayList<Circle>();
 
-    // Debug?
-    private boolean debugMode = false;
+    // Actions
+    AnimationTimer mouvements = new AnimationTimer() {
+        private long lastTime = 0; // ns
+        private double x = 0, y = 150;
+
+        @Override
+        public void start() {
+            lastTime = System.nanoTime();
+            super.start();
+        }
+
+        @Override
+        public void handle(long now) {
+            double deltaTime = (now - lastTime) * 1e-9; // s
+
+            // Activer déroulement de l'arrière-plan
+            controleur.deroulerPlan(deltaTime);
+
+            // Activer la gravité pour Flappy
+            controleur.faireGravite(deltaTime);
+
+            // Déplacer les monstres
+            controleur.bougerMonstres(deltaTime);
+
+            // Créer des monstres
+            controleur.creerMonstres(deltaTime);
+        }
+    };
+    private boolean onPause = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -125,34 +155,17 @@ public class FlappyGhost extends Application {
         // Pour commencer jeu
         controleur.commencer();
 
-        AnimationTimer mouvements = new AnimationTimer() {
-            private long lastTime = 0; // ns
-            private double x = 0, y = 150;
+        debug.setOnAction(e -> {
+            toggleDebugMode();
+        });
 
-            @Override
-            public void start() {
-                lastTime = System.nanoTime();
-                super.start();
+        pause.setOnMouseClicked(e -> {
+            if (onPause) {
+                mouvements.start();
+            } else {
+                mouvements.stop();
             }
-
-            @Override
-            public void handle(long now) {
-                double deltaTime = (now - lastTime) * 1e-9; // s
-
-                // Activer déroulement de l'arrière-plan
-                controleur.deroulerPlan(deltaTime);
-
-                // Activer la gravité pour Flappy
-                controleur.faireGravite(deltaTime);
-
-                // Déplacer les monstres
-                controleur.bougerMonstres(deltaTime);
-
-                // Créer des monstres
-                controleur.creerMonstres(deltaTime);
-            }
-        };
-        mouvements.start();
+        });
     }
 
     public void initFlappy(int rayon) {
@@ -162,18 +175,45 @@ public class FlappyGhost extends Application {
             ghostCercle.setRadius(rayon);
             pane.getChildren().add(ghostCercle);
 
-            fantomeView.setVisible(true);
-            ghostCercle.setVisible(false);
+            fantomeView.setVisible(!debugMode); ghostCercle.setVisible(debugMode);
+            mouvements.start();
         });
     }
 
     public void moveGhost(double xOrigin, double yOrigin, double x, double y) {
         Platform.runLater(() -> {
-            fantomeView.setX(xOrigin);
-            fantomeView.setY(yOrigin);
+            fantomeView.setX(xOrigin); fantomeView.setY(yOrigin);
 
-            ghostCercle.setCenterX(x);
-            ghostCercle.setCenterY(y);
+            ghostCercle.setCenterX(x); ghostCercle.setCenterY(y);
+        });
+    }
+
+    public void moveObstacle(int index, double xOrigin, double yOrigin,
+        double x, double y) {
+        Platform.runLater(() -> {
+            ImageView obs = obstacles.get(index);
+            Circle obsDebug = obstaclesCercles.get(index);
+
+            obs.setX(xOrigin); obs.setY(yOrigin);
+            obsDebug.setCenterX(x); obsDebug.setCenterY(y);
+        });
+    }
+
+    public void ajouterObstacle(double xOrigin, double yOrigin,
+        double x, double y, int rayon, int image) {
+        Platform.runLater(() -> {
+            String imageIndex = Integer.toString(image);
+            ImageView obsIcon = new ImageView(new Image(PATH + imageIndex + ".png"));
+            Circle obsCercle = new Circle(x, y, rayon, Color.YELLOW);
+
+            obsIcon.setX(xOrigin); obsIcon.setY(yOrigin);
+            obsIcon.setPreserveRatio(true); obsIcon.setFitWidth(rayon * 2);
+
+            obstacles.add(obsIcon); obstaclesCercles.add(obsCercle);
+            obsIcon.setVisible(!debugMode); obsCercle.setVisible(debugMode);
+
+            pane.getChildren().add(obsIcon);
+            pane.getChildren().add(obsCercle);
         });
     }
 
@@ -183,33 +223,19 @@ public class FlappyGhost extends Application {
         });
     }
 
-    public void activateDebugMode() {
+    public void toggleDebugMode() {
         Platform.runLater(() -> {
+            debugMode = !debugMode;
             for (ImageView obs : obstacles) {
-                obs.setVisible(false);
+                obs.setVisible(!debugMode);
             }
 
             for (Circle cer : obstaclesCercles) {
-                cer.setVisible(true);
+                cer.setVisible(debugMode);
             }
 
-            fantomeView.setVisible(false);
-            ghostCercle.setVisible(true);
-        });
-    }
-
-    public void deactivateDebugMode() {
-        Platform.runLater(() -> {
-            for (ImageView obs : obstacles) {
-                obs.setVisible(true);
-            }
-
-            for (Circle cer : obstaclesCercles) {
-                cer.setVisible(false);
-            }
-
-            fantomeView.setVisible(true);
-            ghostCercle.setVisible(false);
+            fantomeView.setVisible(!debugMode);
+            ghostCercle.setVisible(debugMode);
         });
     }
 
