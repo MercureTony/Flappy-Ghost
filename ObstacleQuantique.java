@@ -20,6 +20,7 @@ public class ObstacleQuantique extends Obstacle {
 
 		teleportTime += dt;
 		if (teleportTime >= TELEPORT_INCREMENT) {
+			teleportTime = 0;
 			int negX = Math.round(Math.random()) == 0 ? -1 : 1;
 			int negY = Math.round(Math.random()) == 0 ? -1 : 1;
 
