@@ -69,8 +69,21 @@ public class Controleur {
 		for (int i = 0; i < obstacles.size(); i++) {
 			Obstacle obs = obstacles.get(i);
 			if (obs != null) {
+				// Bouger
 				obs.move(dt);
 				app.moveObstacle(i, getXOffset(obs), getYOffset(obs), obs.getX(), obs.getY());
+
+				// Tester si Flappy l'a passé
+				double dist = obs.getX() + (obs.getRayon() + fantome.getRayon()) / 2.0;
+				if (!obs.hasPassed() && dist < fantome.getX()) {
+					obs.pass(fantome);
+					app.changerScore(Integer.toString(fantome.getScore()));
+				}
+
+				// Tester si intersecte
+				if (fantome.testIntersect(obs)) {
+					app.changerScore(Integer.toString(fantome.getScore()));
+				}
 			}
 		}
 	}

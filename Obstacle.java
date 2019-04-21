@@ -5,6 +5,8 @@ public class Obstacle extends Personnage {
 
 	private int imageIndex;
 
+	private boolean passed = false;
+
 	/**
 	 * Constructeur des Obstacle
 	 *
@@ -47,5 +49,14 @@ public class Obstacle extends Personnage {
 	 */
 	public void move(double dt) {
 		this.x -= dt * this.vx;
+	}
+
+	public boolean hasPassed() {
+		return this.passed;
+	}
+
+	public void pass(Flappy f) {
+		this.passed = true;
+		f.incrementScore();
 	}
 }

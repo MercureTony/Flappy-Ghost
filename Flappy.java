@@ -3,6 +3,8 @@ public class Flappy extends Personnage {
 	// Score de Flappy
 	private int score = 0;
 
+	private static final int SCORE_INCREMENT = 5;
+
 	/**
 	 * Constructeur du joueur Flappy
 	 *
@@ -27,7 +29,7 @@ public class Flappy extends Personnage {
 	 * Incrémente le score
 	 */
 	public void incrementScore() {
-		this.score++;
+		this.score += SCORE_INCREMENT;
 	}
 
 	/**
@@ -53,12 +55,14 @@ public class Flappy extends Personnage {
 	 * Vérifie si Flappy intersecte un obstacle, si oui, réinitialise son compteur
 	 * 
 	 * @param other qui représente les Obstacle
+	 * @return boolean if intersects
 	 */
-	public void testIntersect(Personnage other) {
+	public boolean testIntersect(Personnage other) {
 		if (intersect(other)) {
 			this.score = 0;
 			this.setVx(120);
 			this.setAy(500);
 		}
+		return intersect(other);
 	}
 }
