@@ -85,7 +85,7 @@ public class Controleur {
 		accuCreate += dt;
 		if (accuCreate > SPAWN_OBSTACLE) {
 			accuCreate = 0.0;
-			Obstacle obs;
+			Obstacle obs = null;
 
 			int initialRayon = (int) (Math.random() * Obstacle.MAX_RAYON + 1);
         	if (initialRayon < 10) { initialRayon = 10; }
@@ -93,13 +93,17 @@ public class Controleur {
 			double initialX = FlappyGhost.MAX_WIDTH + initialRayon / 2.0;
 			double initialY = Math.random() * FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
 
-			double randomNumber = Math.random();
-			if (randomNumber < 1/3) {
-				obs = new ObstacleSinus(initialX, initialY);
-			} else if (randomNumber < 2/3) {
-				obs = new ObstacleStatique(initialX, initialY);
-			} else {
-				obs = new ObstacleQuantique(initialX, initialY);
+			int randomType = (int) (Math.random() * 3);
+			switch (randomType) {
+				case 0:
+					obs = new ObstacleSinus(initialX, initialY);
+					break;
+				case 1:
+					obs = new ObstacleStatique(initialX, initialY);
+					break;
+				case 2:
+					obs = new ObstacleQuantique(initialX, initialY);
+					break;
 			}
 
 			obs.setRayon(initialRayon);

@@ -162,8 +162,10 @@ public class FlappyGhost extends Application {
 
         pause.setOnMouseClicked(e -> {
             if (onPause) {
+                onPause = false;
                 mouvements.start();
             } else {
+                onPause = true;
                 mouvements.stop();
             }
         });

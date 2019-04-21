@@ -4,7 +4,12 @@ public abstract class Personnage {
     protected double y; // Du centre - px
     protected int rayon;
 
-    protected int vx; // Vitesse en x (px/s)
+    protected static int vx; // Vitesse en x (px/s)
+    protected static int vy = 0; // Vitesse en y
+
+    // Gravité px/s^2
+    protected static int ax = 0;
+    protected static int ay = 500;
 
     /**
      * Constructeur du Personnage
@@ -101,6 +106,57 @@ public abstract class Personnage {
      */
     public void setVx(int vx) {
         this.vx = vx;
+    }
+
+    /**
+     *
+     * @return la vitesse en ordonnée
+     */
+    public int getVy() {
+        return this.vy;
+    }
+
+    /**
+     * Modifie la vitesse en ordonnée
+     *
+     * @param vy
+     */
+    public void setVy(int vy) {
+        this.vy = vy;
+    }
+
+    /**
+     *
+     * @return l'accélération en abscisse
+     */
+    public int getAx() {
+        return this.ax;
+    }
+
+    /**
+     * Modifie l'accélération en ordonnée
+     *
+     * @param ax
+     */
+    public void setAx(int ax) {
+        this.ax = ax;
+    }
+
+    /**
+     *
+     * @return l'accélération en ordonnée
+     */
+    public int getAy() {
+        return this.ay;
+    }
+
+    /**
+     * Modifie l'accélération en ordonnée
+     *
+     * @param ay
+     */
+    public void setAy(int ay) {
+        this.ay = ay;
     }
 
     /**

@@ -1,11 +1,5 @@
 public class Flappy extends Personnage {
 
-    private int vy = 0; // Vitesse en x
-
-    // Gravité px/s^2
-    private int ax = 0;
-    private int ay = 500;
-
     // Score de Flappy
     private int score = 0;
 
@@ -34,57 +28,6 @@ public class Flappy extends Personnage {
      */
     public void incrementScore() {
         this.score++;
-    }
-
-    /**
-     *
-     * @return la vitesse en ordonnée
-     */
-    public int getVy() {
-        return this.vy;
-    }
-
-    /**
-     * Modifie la vitesse en ordonnée
-     *
-     * @param vy
-     */
-    public void setVy(int vy) {
-        this.vy = vy;
-    }
-
-    /**
-     *
-     * @return l'accélération en abscisse
-     */
-    public int getAx() {
-        return this.ax;
-    }
-
-    /**
-     * Modifie l'accélération en ordonnée
-     *
-     * @param ax
-     */
-    public void setAx(int ax) {
-        this.ax = ax;
-    }
-
-    /**
-     *
-     * @return l'accélération en ordonnée
-     */
-    public int getAy() {
-        return this.ay;
-    }
-
-    /**
-     * Modifie l'accélération en ordonnée
-     *
-     * @param ay
-     */
-    public void setAy(int ay) {
-        this.ay = ay;
     }
 
     /**
