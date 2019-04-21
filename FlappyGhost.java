@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.shape.Circle;
 import javafx.scene.control.Button;
 
 public class FlappyGhost extends Application {
@@ -29,38 +32,44 @@ public class FlappyGhost extends Application {
     // Controleur
     private Controleur controleur = new Controleur(this);
 
-    // Components of the window
-    Button pause = new Button("Pause");
-    CheckBox debug = new CheckBox("Mode debug");
-    Separator[] separator = new Separator[2];
-    Text scoreLabel = new Text("Score : ");
-    Text score = new Text("");
+    // Platform design
+    VBox root = new VBox();
+    Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
 
-    String path = "file:images/";
+    // Background scene
+    Pane pane = new Pane();
+
+    // Components of the window
+    private Button pause = new Button("Pause");
+    private CheckBox debug = new CheckBox("Mode debug");
+    private Separator[] separator = new Separator[2];
+    private Text scoreLabel = new Text("Score : ");
+    private Text score = new Text("");
+
+    private static final String PATH = "file:images/";
 
     // Instancier image du fantome
-    Image ghost = new Image(path + "ghost.png");
+    Image ghost = new Image(PATH + "ghost.png");
     ImageView fantomeView = new ImageView(ghost);
+    Circle ghostCercle = new Circle();
 
-    // Load images
-    Image[] obstacles = new Image[Obstacle.NBR_IMAGES];
+    // Obstacles
+    private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
+    private ArrayList<Circle> obstaclesCercles = new ArrayList<Circle>();
+
+    // Debug?
+    private boolean debugMode = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Platform design
-        VBox root = new VBox();
-        Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
-
-        // Background scene
-        Pane pane = new Pane();
         root.getChildren().add(pane);
         Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
         pane.getChildren().add(gameScene);
         GraphicsContext context = gameScene.getGraphicsContext2D();
 
         // L'arrière-plan
-        context.drawImage(new Image(path + "bg.png"), 0, 0);
+        context.drawImage(new Image(PATH + "bg.png"), 0, 0);
 
         // Separator
         for (int i = 0; i < separator.length; i++){
@@ -81,10 +90,6 @@ public class FlappyGhost extends Application {
         menu.getChildren().add(scoreLabel);
         menu.getChildren().add(score);
         root.getChildren().add(1, menu);
-
-        fantomeView.setX(FlappyGhost.MAX_WIDTH / 2.0);
-        fantomeView.setY(FlappyGhost.GAME_HEIGHT / 2.0);
-        pane.getChildren().add(fantomeView);
 
         /* Après l’exécution de la fonction, le
            focus va automatiquement au canvas */
@@ -117,6 +122,9 @@ public class FlappyGhost extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        // Pour commencer jeu
+        controleur.commencer();
+
         AnimationTimer mouvements = new AnimationTimer() {
             private long lastTime = 0; // ns
             private double x = 0, y = 150;
@@ -147,16 +155,61 @@ public class FlappyGhost extends Application {
         mouvements.start();
     }
 
-    public void moveGhost(double x, double y) {
+    public void initFlappy(int rayon) {
         Platform.runLater(() -> {
-            fantomeView.setX(x);
-            fantomeView.setY(y);
+            pane.getChildren().add(fantomeView);
+
+            ghostCercle.setRadius(rayon);
+            pane.getChildren().add(ghostCercle);
+
+            fantomeView.setVisible(true);
+            ghostCercle.setVisible(false);
+        });
+    }
+
+    public void moveGhost(double xOrigin, double yOrigin, double x, double y) {
+        Platform.runLater(() -> {
+            fantomeView.setX(xOrigin);
+            fantomeView.setY(yOrigin);
+
+            ghostCercle.setCenterX(x);
+            ghostCercle.setCenterY(y);
         });
     }
 
     public void changerScore(String newScore) {
         Platform.runLater(() -> {
             score.setText(newScore);
+        });
+    }
+
+    public void activateDebugMode() {
+        Platform.runLater(() -> {
+            for (ImageView obs : obstacles) {
+                obs.setVisible(false);
+            }
+
+            for (Circle cer : obstaclesCercles) {
+                cer.setVisible(true);
+            }
+
+            fantomeView.setVisible(false);
+            ghostCercle.setVisible(true);
+        });
+    }
+
+    public void deactivateDebugMode() {
+        Platform.runLater(() -> {
+            for (ImageView obs : obstacles) {
+                obs.setVisible(true);
+            }
+
+            for (Circle cer : obstaclesCercles) {
+                cer.setVisible(false);
+            }
+
+            fantomeView.setVisible(true);
+            ghostCercle.setVisible(false);
         });
     }
 

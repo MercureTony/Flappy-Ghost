@@ -2,13 +2,31 @@ import java.util.ArrayList;
 
 public class Controleur {
 
-	private Flappy fantome = new Flappy(FlappyGhost.MAX_WIDTH / 2, FlappyGhost.GAME_HEIGHT / 2);
+	private Flappy fantome = new Flappy(0, 0);
 	private ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
 	private FlappyGhost app;
 
+	private boolean debug = false;
+
     public Controleur(FlappyGhost app) {
     	this.app = app;
+    }
+
+    private double getXOffset(Personnage p) {
+    	return p.getX() - p.getRayon();
+    }
+
+    private double getYOffset(Personnage p) {
+    	return p.getY() - p.getRayon();
+    }
+
+    public void commencer() {
+    	fantome.setX((FlappyGhost.MAX_WIDTH - fantome.getRayon()) / 2.0);
+    	fantome.setY((FlappyGhost.GAME_HEIGHT - fantome.getRayon()) / 2.0);
+    	app.moveGhost(getXOffset(fantome), getYOffset(fantome),
+    		fantome.getX(), fantome.getY());
+    	app.initFlappy(fantome.getRayon());
     }
 
     /**
@@ -17,7 +35,8 @@ public class Controleur {
      */
     public void sauterFantome() {
         fantome.jump();
-        app.moveGhost(fantome.getX(), fantome.getY());
+        app.moveGhost(getXOffset(fantome), getYOffset(fantome),
+    		fantome.getX(), fantome.getY());
     }
 
     /**
