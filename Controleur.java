@@ -91,7 +91,7 @@ public class Controleur {
         	if (initialRayon < 10) { initialRayon = 10; }
 
 			double initialX = FlappyGhost.MAX_WIDTH + initialRayon / 2.0;
-			double initialY = FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
+			double initialY = Math.random() * FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
 
 			double randomNumber = Math.random();
 			if (randomNumber < 1/3) {
