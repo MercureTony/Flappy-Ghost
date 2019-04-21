@@ -74,6 +74,7 @@ public class FlappyGhost extends Application {
         @Override
         public void handle(long now) {
             double deltaTime = (now - lastTime) * 1e-9; // s
+            lastTime = now;
 
             // Activer déroulement de l'arrière-plan
             controleur.deroulerPlan(deltaTime);

@@ -84,7 +84,6 @@ public class Controleur {
 	public void creerMonstres(double dt) {
 		accuCreate += dt;
 		if (accuCreate > SPAWN_OBSTACLE) {
-			System.out.println(accuCreate);
 			accuCreate = 0.0;
 			Obstacle obs;
 
