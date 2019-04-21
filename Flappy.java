@@ -114,7 +114,7 @@ public class Flappy extends Personnage {
     public void testIntersect(Personnage other) {
         if (intersect(other)) {
             this.score = 0;
-            this.setVy(120);
+            this.setVx(120);
             this.setAy(500);
         }
     }
