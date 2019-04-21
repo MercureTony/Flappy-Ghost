@@ -81,12 +81,15 @@ public class Controleur {
 				}
 
 				// Tester si intersecte
-				if (fantome.testIntersect(obs)) {
+				if (fantome.testIntersect(obs) != obs.getIntersecting()) {
+					obs.toggleIntersecting();
 					app.changerScore(Integer.toString(fantome.getScore()));
+					app.colourierIntersection(i, obs.getIntersecting());
 				}
 
 				// Tester si hors de l'écran (x)
 				if (obs.getX() + obs.getRayon() <= 0) {
+					obstacles.remove(i);
 					app.enleverObstacle(i);
 				}
 			}

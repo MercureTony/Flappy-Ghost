@@ -226,6 +226,18 @@ public class FlappyGhost extends Application {
 		});
 	}
 
+	public void colourierIntersection(int index, boolean intersecting) {
+		Platform.runLater(() -> {
+			Circle obs = obstaclesCercles.get(index);
+
+			if (intersecting) {
+				obs.setFill(Color.RED);
+			} else {
+				obs.setFill(Color.YELLOW);
+			}
+		});
+	}
+
 	public void changerScore(String newScore) {
 		Platform.runLater(() -> {
 			score.setText(newScore);

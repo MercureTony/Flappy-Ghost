@@ -6,6 +6,7 @@ public class Obstacle extends Personnage {
 	private int imageIndex;
 
 	private boolean passed = false;
+	private boolean intersecting = false;
 
 	/**
 	 * Constructeur des Obstacle
@@ -58,5 +59,13 @@ public class Obstacle extends Personnage {
 	public void pass(Flappy f) {
 		this.passed = true;
 		f.incrementScore();
+	}
+
+	public boolean getIntersecting() {
+		return this.intersecting;
+	}
+
+	public void toggleIntersecting() {
+		this.intersecting = !this.intersecting;
 	}
 }
