@@ -18,7 +18,7 @@ public class Flappy extends Personnage {
     public Flappy(double x, double y) {
         // Rayon de 30px
         super(x, y, 30);
-        this.vy = 120;
+        this.vx = 120;
     }
 
     /**
@@ -103,7 +103,7 @@ public class Flappy extends Personnage {
      * Augmnenter la vitesse à 300px/s quand le fantôme saute
      */
     public void jump() {
-        this.vx = 300;
+        this.vy = 300;
     }
 
     /**
