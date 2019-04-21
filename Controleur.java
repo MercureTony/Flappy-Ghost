@@ -123,8 +123,7 @@ public class Controleur {
 			obs.setRayon(initialRayon);
 
 			obstacles.add(obs);
-			app.ajouterObstacle(getXOffset(obs), getYOffset(obs),
-				obs.getX(), obs.getY(), obs.getRayon(), obs.getImageIndex());
+			app.ajouterObstacle(obs.getX(), obs.getY(), obs.getRayon(), obs.getImageIndex());
 		}
 	}
 }
