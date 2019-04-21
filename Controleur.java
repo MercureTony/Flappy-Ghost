@@ -75,7 +75,7 @@ public class Controleur {
 
 				// Tester si Flappy l'a passé
 				double dist = obs.getX() + (obs.getRayon() + fantome.getRayon()) / 2.0;
-				if (!obs.hasPassed() && dist < fantome.getX()) {
+				if (!obs.hasPassed() && !obs.hasIntersected() && dist < fantome.getX()) {
 					obs.pass(fantome);
 					app.changerScore(Integer.toString(fantome.getScore()));
 				}

@@ -7,6 +7,7 @@ public class Obstacle extends Personnage {
 
 	private boolean passed = false;
 	private boolean intersecting = false;
+	private boolean hasIntersected = false;
 
 	/**
 	 * Constructeur des Obstacle
@@ -65,7 +66,12 @@ public class Obstacle extends Personnage {
 		return this.intersecting;
 	}
 
+	public boolean hasIntersected() {
+		return this.hasIntersected;
+	}
+
 	public void toggleIntersecting() {
 		this.intersecting = !this.intersecting;
+		this.hasIntersected = true;
 	}
 }
