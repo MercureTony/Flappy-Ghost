@@ -340,7 +340,7 @@ public class FlappyGhost extends Application {
 			for (ImageView bg : backgrounds) {
 				bg.setX(bg.getX() - dt * vitesse);
 				if (bg.getX() <= -MAX_WIDTH) {
-					bg.setX(MAX_WIDTH);
+					bg.setX(MAX_WIDTH - dt * vitesse);
 				}
 			}
 		});
