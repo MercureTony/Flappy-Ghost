@@ -1,6 +1,6 @@
 public class ObstacleSinus extends Obstacle {
 
-	private static final int AMPLITUDE = 50; // px
+	public static final int AMPLITUDE = 50; // px
 
 	private double yInitial; // px
 

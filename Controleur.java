@@ -63,8 +63,16 @@ public class Controleur {
 		for (int i = 0; i < obstacles.size(); i++) {
 			Obstacle obs = obstacles.get(i);
 			if (obs != null) {
-				// Bouger
 				obs.move(dt);
+
+				// S'assurer qu'il est pas hors en y
+				double curY = obs.getY();
+				if (curY - obs.getRayon() < 0) {
+					obs.setY(Math.abs(curY) + obs.getRayon());
+				} else if (curY + obs.getRayon() > FlappyGhost.GAME_HEIGHT) {
+					obs.setY(FlappyGhost.GAME_HEIGHT - obs.getRayon());
+				}
+
 				app.moveObstacle(i, obs.getX(), obs.getY());
 
 				// Tester si Flappy l'a passé
@@ -106,11 +114,15 @@ public class Controleur {
 			if (initialRayon < 10) { initialRayon = 10; }
 
 			double initialX = FlappyGhost.MAX_WIDTH + initialRayon / 2.0;
-			double initialY = Math.random() * FlappyGhost.GAME_HEIGHT + initialRayon / 2.0;
+			double initialY = Math.random() * (FlappyGhost.GAME_HEIGHT - initialRayon);
 
 			int randomType = (int) (Math.random() * 3); // Nombre de types d'obstacles
 			switch (randomType) {
 				case 0:
+					double minY = ObstacleSinus.AMPLITUDE / 2.0 + initialRayon;
+					double maxY = FlappyGhost.GAME_HEIGHT - ObstacleSinus.AMPLITUDE / 2.0 - initialRayon;
+					if (initialY > maxY) { initialY = maxY; } else if (initialY < minY) { initialY = minY; }
+
 					obs = new ObstacleSinus(initialX, initialY);
 					break;
 				case 1:
