@@ -43,10 +43,12 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
 	 */
 	public void update() {
-		this.vx += 15;
+		int inverse = this.graviteInverse ? -1 : 1;
+		this.vx += inverse * 15;
 		this.ay += 15;
-		if (this.vy < -300) {
-			this.vy = -300;
+
+		if (Math.abs(this.vy) > 300) {
+			this.vy = inverse * 300;
 		}
 	}
 
@@ -54,9 +56,13 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
+<<<<<<< HEAD
 		this.vy = -300;
 		this.graviteInverse = false; // Gravité normal
 		this.ay = Math.abs(this.ay);
+=======
+		this.graviteInverse = false;
+>>>>>>> 6d096f43261d523ed83ddbaf62024c62fd730846
 		this.vy = 300;
 	}
 
@@ -67,9 +73,8 @@ public class Flappy extends Personnage {
 	 */
 	@Override
 	public void move(double dt) {
-		int inverse = this.graviteInverse ? 1 : -1;
 		this.vy -= this.ay * dt;
-		this.y += inverse * this.vy * dt;
+		this.y += this.vy * dt;
 	}
 
 	/**
@@ -77,7 +82,7 @@ public class Flappy extends Personnage {
 	 */
 	public void toggleGravite() {
 		this.graviteInverse = !this.graviteInverse;
-		this.ay *= -1;
+		this.vy *= -1;
 	}
 
 	/**
@@ -90,7 +95,12 @@ public class Flappy extends Personnage {
 	public boolean testIntersect(Personnage other) {
 		if (intersect(other)) {
 			this.score = 0;
+<<<<<<< HEAD
 			this.setVx(-120);
+=======
+
+			this.setVx(120);
+>>>>>>> 6d096f43261d523ed83ddbaf62024c62fd730846
 			this.setAy(500);
 		}
 		return intersect(other);

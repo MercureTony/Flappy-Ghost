@@ -343,8 +343,10 @@ public class FlappyGhost extends Application {
 		Platform.runLater(() -> {
 			for (ImageView bg : backgrounds) {
 				bg.setX(bg.getX() - dt * vitesse);
-				if (bg.getX() <= -MAX_WIDTH) {
-					bg.setX(MAX_WIDTH - dt * vitesse);
+
+				double egout = bg.getX() + MAX_WIDTH;
+				if (egout <= 0) {
+					bg.setX(MAX_WIDTH + egout);
 				}
 			}
 		});
