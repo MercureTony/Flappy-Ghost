@@ -5,6 +5,8 @@ public class Flappy extends Personnage {
 
 	private static final int SCORE_INCREMENT = 5;
 
+	private boolean graviteInverse = false;
+
 	/**
 	 * Constructeur du joueur Flappy
 	 *
@@ -52,7 +54,29 @@ public class Flappy extends Personnage {
 	 * Augmnenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
+		this.graviteInverse = false; // Gravité normal
+		this.ay = Math.abs(this.ay);
 		this.vy = 300;
+	}
+
+	/**
+	 * Déplacer Flappy avec la gravité
+	 *
+	 * @param dt Delta de temps - s
+	 */
+	@Override
+	public void move(double dt) {
+		int inverse = this.graviteInverse ? 1 : -1;
+		this.vy -= this.ay * dt;
+		this.y += inverse * this.vy * dt;
+	}
+
+	/**
+	 * Toggle direction de la gravité
+	 */
+	public void toggleGravite() {
+		this.graviteInverse = !this.graviteInverse;
+		this.ay *= -1;
 	}
 
 	/**

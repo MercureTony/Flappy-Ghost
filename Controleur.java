@@ -28,12 +28,11 @@ public class Controleur {
 	}
 
 	/**
-	 * Faire sauter le fantome et déplacer l'image
+	 * Faire sauter le fantome
 	 * Se fait quand la touche 'espace' est faite
 	 */
 	public void sauterFantome() {
 		fantome.jump();
-		app.moveGhost(fantome.getX(), fantome.getY());
 	}
 
 	/**
@@ -44,6 +43,26 @@ public class Controleur {
 	}
 
 	/**
+	 * Faire subir Flappy à la gravité - lui bouger
+	 * Thread active durant tout le jeu
+	 *
+	 * @param dt Delta de temps
+	 */
+	public void bougerFantome(double dt) {
+		fantome.move(dt);
+
+		// Bondir si hors de la vue
+		if (fantome.getY() - fantome.getRayon() < 0) {
+			fantome.toggleGravite();
+			fantome.setY(fantome.getRayon());
+		} else if (fantome.getY() + fantome.getRayon() > FlappyGhost.GAME_HEIGHT) {
+			fantome.toggleGravite();
+			fantome.setY(FlappyGhost.GAME_HEIGHT - fantome.getRayon());
+		}
+		app.moveGhost(fantome.getX(), fantome.getY());
+	}
+
+	/**
 	 * Faire dérouler l'arrière-plan
 	 * dépendant sur la vitesse de Flappy
 	 * Thread active durant tout le jeu
@@ -51,14 +70,6 @@ public class Controleur {
 	 * @param dt Delta de temps
 	 */
 	public void deroulerPlan(double dt) {}
-
-	/**
-	 * Faire subir Flappy à la gravité
-	 * Thread active durant tout le jeu
-	 *
-	 * @param dt Delta de temps
-	 */
-	public void faireGravite(double dt) {}
 
 	/**
 	 * Faire déplacer les monstres
@@ -75,9 +86,9 @@ public class Controleur {
 				// S'assurer qu'il est pas hors en y
 				double curY = obs.getY();
 				if (curY - obs.getRayon() < 0) {
-					obs.setY(Math.abs(curY) + obs.getRayon());
+					obs.setY(0 - curY + obs.getRayon() * 2);
 				} else if (curY + obs.getRayon() > FlappyGhost.GAME_HEIGHT) {
-					obs.setY(FlappyGhost.GAME_HEIGHT - obs.getRayon());
+					obs.setY(2 * FlappyGhost.GAME_HEIGHT - curY - obs.getRayon() * 2);
 				}
 
 				app.moveObstacle(i, obs.getX(), obs.getY());
