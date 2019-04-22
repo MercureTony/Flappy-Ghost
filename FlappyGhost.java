@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.shape.Circle;
@@ -51,44 +52,24 @@ public class FlappyGhost extends Application {
 
 	private boolean debugMode = false;
 
+	AnimationTimer mouvements;
+
 	// Instancier image du fantome
 	Image ghost = new Image(PATH + "ghost.png");
 	ImageView fantomeView = new ImageView(ghost);
 	Circle ghostCercle = new Circle();
 
+	// Animation of the background
+	Image background = new Image(PATH + "bg.png");
+	private int firstBackground = 0;
+	private int secondBackgroud = MAX_WIDTH;
+	private int speedAnimation = -120;
+
 	// Obstacles
 	private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
 	private ArrayList<Circle> obstaclesCercles = new ArrayList<Circle>();
 
-	// Actions
-	AnimationTimer mouvements = new AnimationTimer() {
-		private long lastTime = 0; // ns
-		private double x = 0, y = 150;
 
-		@Override
-		public void start() {
-			lastTime = System.nanoTime();
-			super.start();
-		}
-
-		@Override
-		public void handle(long now) {
-			double deltaTime = (now - lastTime) * 1e-9; // s
-			lastTime = now;
-
-			// Activer déroulement de l'arrière-plan
-			controleur.deroulerPlan(deltaTime);
-
-			// Activer la gravité pour Flappy
-			controleur.faireGravite(deltaTime);
-
-			// Déplacer les monstres
-			controleur.bougerMonstres(deltaTime);
-
-			// Créer des monstres
-			controleur.creerMonstres(deltaTime);
-		}
-	};
 	private boolean onPause = false;
 
 	@Override
@@ -98,9 +79,6 @@ public class FlappyGhost extends Application {
 		Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
 		pane.getChildren().add(gameScene);
 		GraphicsContext context = gameScene.getGraphicsContext2D();
-
-		// L'arrière-plan
-		context.drawImage(new Image(PATH + "bg.png"), 0, 0);
 
 		// Separator
 		for (int i = 0; i < separator.length; i++){
@@ -121,6 +99,50 @@ public class FlappyGhost extends Application {
 		menu.getChildren().add(scoreLabel);
 		menu.getChildren().add(score);
 		root.getChildren().add(1, menu);
+
+		// Actions
+		mouvements = new AnimationTimer() {
+			private long lastTime = 0; // ns
+			private double x = 0, y = 150;
+
+			@Override
+			public void start() {
+				lastTime = System.nanoTime();
+				super.start();
+			}
+
+			@Override
+			public void handle(long now) {
+				double deltaTime = (now - lastTime) * 1e-9; // s
+				lastTime = now;
+
+				// Activer déroulement de l'arrière-plan
+				controleur.deroulerPlan(deltaTime);
+
+				// Activer la gravité pour Flappy
+				controleur.faireGravite(deltaTime);
+
+				// Déplacer les monstres
+				controleur.bougerMonstres(deltaTime);
+
+				// Créer des monstres
+				controleur.creerMonstres(deltaTime);
+
+				// Animation du background
+				firstBackground += deltaTime*speedAnimation;
+				secondBackgroud += deltaTime+speedAnimation;
+				if (firstBackground < (-MAX_WIDTH)){
+					firstBackground += 2*MAX_WIDTH;
+				}
+				else if (secondBackgroud < (-MAX_WIDTH)){
+					secondBackgroud += 2*MAX_WIDTH;
+				}
+
+				context.clearRect(0,0,MAX_WIDTH,MAX_HEIGHT);
+				context.drawImage(background,firstBackground,0);
+				context.drawImage(background,secondBackgroud,0);
+			}
+		};
 
 		/* Après l’exécution de la fonction, le
 		   focus va automatiquement au canvas */
