@@ -97,11 +97,18 @@ public class Flappy extends Personnage {
 	 */
 	public boolean testIntersect(Personnage other) {
 		if (intersect(other)) {
-			this.score = 0;
-
 			this.setVx(120);
 			this.setAy(500);
 		}
 		return intersect(other);
+	}
+
+	/**
+	 * Remettre le score à 0
+	 *
+	 * Quand jeu perdu
+	 */
+	public void resetScore() {
+		this.score = 0;
 	}
 }

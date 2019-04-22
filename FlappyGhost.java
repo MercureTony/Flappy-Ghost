@@ -176,7 +176,7 @@ public class FlappyGhost extends Application {
 		controleur.commencer();
 
 		debug.setOnAction(e -> {
-			toggleDebugMode();
+			controleur.toggleDebug();
 		});
 
 		pause.setOnMouseClicked(e -> {

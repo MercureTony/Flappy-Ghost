@@ -107,6 +107,7 @@ public class Controleur {
 				// Tester si intersecte
 				if (fantome.testIntersect(obs) != obs.getIntersecting()) {
 					obs.toggleIntersecting();
+					if (!debug) { fantome.resetScore(); }
 					app.changerScore(Integer.toString(fantome.getScore()));
 					app.colourierIntersection(i, obs.getIntersecting());
 				}
@@ -160,5 +161,13 @@ public class Controleur {
 			obstacles.add(obs);
 			app.ajouterObstacle(obs.getX(), obs.getY(), obs.getRayon(), obs.getImageIndex());
 		}
+	}
+
+	/**
+	 * Changer statut de debug
+	 */
+	public void toggleDebug() {
+		this.debug = !this.debug;
+		app.toggleDebugMode();
 	}
 }
