@@ -80,6 +80,12 @@ public class Flappy extends Personnage {
 	public void toggleGravite() {
 		this.graviteInverse = !this.graviteInverse;
 		this.vy *= -1;
+		if (this.vy < 0 && (this.vy > -200 || this.vy < -200)){
+			this.vy = -200;
+		}
+		else if (this.vy > 0 && this.vy > 100 ){
+			this.vy = 100;
+		}
 	}
 
 	/**
