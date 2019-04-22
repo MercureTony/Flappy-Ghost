@@ -100,6 +100,9 @@ public class FlappyGhost extends Application {
 
 			// Créer des monstres
 			controleur.creerMonstres(deltaTime);
+
+			// Update
+			controleur.update();
 		}
 	};
 

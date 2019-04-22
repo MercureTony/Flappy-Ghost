@@ -43,12 +43,11 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
 	 */
 	public void update() {
-		int inverse = this.graviteInverse ? 1 : -1;
-		this.vx += inverse * 15;
-		this.ay += 15;
+		this.vx += 1.8;
+		this.ay += 1;
 
-		if (Math.abs(this.vy) > 300) {
-			this.vy = inverse * 300;
+		if (Math.abs(this.vx) > 330) {
+			this.vx = 330;
 		}
 	}
 

@@ -109,6 +109,13 @@ public class Controleur {
 		}
 	}
 
+	public void update(){
+	    int score = fantome.getScore();
+	    if (score != 0 && score % 10 == 0){
+	        fantome.update();
+        }
+    }
+
 	/**
 	 * Créer les monstres
 	 * Thread active durant tout le jeu
