@@ -39,27 +39,6 @@ public class Controleur {
 		fantome.jump();
 	}
 
-	/**
-	 * Faire subir Flappy à la gravité - lui bouger
-	 * Thread active durant tout le jeu
-	 *
-	 * @param dt Delta de temps
-	 */
-	public void deroulerPlan(double dt, int fps, double[] array, GraphicsContext c, Image bg) {
-
-		// Animation du background
-		for (int i = 0; i < fps; i++){
-			array[i] += Flappy.vx*dt;
-			if (array[i] < -FlappyGhost.MAX_WIDTH){
-				// Ajustement des arrières-plans
-				array[i] = FlappyGhost.MAX_WIDTH;
-			}
-		}
-			c.clearRect(0,0,FlappyGhost.MAX_WIDTH,FlappyGhost.MAX_HEIGHT);
-			for (int j = 0; j < fps; j++){
-				c.drawImage(bg,array[j],0);
-			}
-
 	public void bougerFantome(double dt) {
 		fantome.move(dt);
 

@@ -90,7 +90,7 @@ public class FlappyGhost extends Application {
 			lastTime = now;
 
 			// Activer déroulement de l'arrière-plan
-			controleur.deroulerPlan(deltaTime, fps, framerate, context, background);
+			controleur.deroulerPlan(deltaTime);
 
 			// Activer la gravité pour Flappy - lui bouger
 			controleur.bougerFantome(deltaTime);
