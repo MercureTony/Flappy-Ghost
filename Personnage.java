@@ -134,6 +134,14 @@ public abstract class Personnage {
 	}
 
 	/**
+	 * Déplacer le personnage avec une règle par le temps
+	 *. Ébauche pour types différents
+	 *
+	 * @param dt Delta de temps - s
+	 */
+	public void move(double dt) {}
+
+	/**
 	 * Méthode qui permet de verifier si deux Personnage s'intersecte
 	 *
 	 * @param other qui l'autre Personnage avec qui ont vérfie l'intersection
