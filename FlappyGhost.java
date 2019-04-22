@@ -49,12 +49,9 @@ public class FlappyGhost extends Application {
 	private Text scoreLabel = new Text("Score : ");
 	private Text score = new Text("");
 
-<<<<<<< HEAD
 	// Framerate du jeu
 	private int fps = 2;
 
-=======
->>>>>>> 551ec9dfd392b60355fdedfdeb1ffc80bfb3d904
 	// Path du dossier image
 	private static final String PATH = "images/";
 

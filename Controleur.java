@@ -45,7 +45,6 @@ public class Controleur {
 	 *
 	 * @param dt Delta de temps
 	 */
-<<<<<<< HEAD
 	public void deroulerPlan(double dt, int fps, double[] array, GraphicsContext c, Image bg) {
 
 		// Animation du background
@@ -61,7 +60,6 @@ public class Controleur {
 				c.drawImage(bg,array[j],0);
 			}
 
-=======
 	public void bougerFantome(double dt) {
 		fantome.move(dt);
 
@@ -74,7 +72,6 @@ public class Controleur {
 			fantome.setY(FlappyGhost.GAME_HEIGHT - fantome.getRayon());
 		}
 		app.moveGhost(fantome.getX(), fantome.getY());
->>>>>>> 551ec9dfd392b60355fdedfdeb1ffc80bfb3d904
 	}
 
 	/**

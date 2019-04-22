@@ -54,13 +54,10 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
-<<<<<<< HEAD
 		this.vy = -300;
-=======
 		this.graviteInverse = false; // Gravité normal
 		this.ay = Math.abs(this.ay);
 		this.vy = 300;
->>>>>>> 551ec9dfd392b60355fdedfdeb1ffc80bfb3d904
 	}
 
 	/**
