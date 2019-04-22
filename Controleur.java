@@ -22,8 +22,8 @@ public class Controleur {
 	public void commencer() {
 		fantome.setX((FlappyGhost.MAX_WIDTH - fantome.getRayon()) / 2.0);
 		fantome.setY((FlappyGhost.GAME_HEIGHT - fantome.getRayon()) / 2.0);
-		app.moveGhost(fantome.getX(), fantome.getY());
 		app.initFlappy(fantome.getRayon());
+		app.moveGhost(fantome.getX(), fantome.getY());
 	}
 
 	/**
