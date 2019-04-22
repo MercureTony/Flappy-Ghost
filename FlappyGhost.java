@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.shape.Circle;
@@ -36,6 +37,7 @@ public class FlappyGhost extends Application {
 	// Platform design
 	VBox root = new VBox();
 	Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
+	GraphicsContext context;
 
 	// Background scene
 	Pane pane = new Pane();
@@ -47,7 +49,7 @@ public class FlappyGhost extends Application {
 	private Text scoreLabel = new Text("Score : ");
 	private Text score = new Text("");
 
-	private static final String PATH = "file:images/";
+	private static final String PATH = "images/";
 
 	private boolean debugMode = false;
 
@@ -55,6 +57,10 @@ public class FlappyGhost extends Application {
 	Image ghost = new Image(PATH + "ghost.png");
 	ImageView fantomeView = new ImageView(ghost);
 	Circle ghostCercle = new Circle();
+
+	// Animation of the background
+	private Image background = new Image(PATH+"bg.png");
+	private double[] framerate = new double[16];
 
 	// Obstacles
 	private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
@@ -69,6 +75,10 @@ public class FlappyGhost extends Application {
 		public void start() {
 			lastTime = System.nanoTime();
 			super.start();
+			// Create a framerate
+			for (int i = 0; i < framerate.length; i++){
+				framerate[i] = i*MAX_WIDTH;
+			}
 		}
 
 		@Override
@@ -87,8 +97,25 @@ public class FlappyGhost extends Application {
 
 			// Créer des monstres
 			controleur.creerMonstres(deltaTime);
+
+			// Animation du background
+			for (int i = 0; i < framerate.length; i++){
+				framerate[i] += controleur.flappyVx()*deltaTime;
+				if (framerate[i] < -MAX_WIDTH){
+					framerate[i] = i*MAX_WIDTH;
+				}
+			}
+
+			context.clearRect(0,0,MAX_WIDTH,MAX_HEIGHT);
+			for (int j = 0; j < framerate.length; j++){
+				context.drawImage(background,framerate[j],0);
+			}
+			if (controleur.flappyScore()!= 0 && controleur.flappyScore() % 10 == 0){
+				controleur.updateSpeed();
+			}
 		}
 	};
+
 	private boolean onPause = false;
 
 	@Override
@@ -97,10 +124,7 @@ public class FlappyGhost extends Application {
 		root.getChildren().add(pane);
 		Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
 		pane.getChildren().add(gameScene);
-		GraphicsContext context = gameScene.getGraphicsContext2D();
-
-		// L'arrière-plan
-		context.drawImage(new Image(PATH + "bg.png"), 0, 0);
+		context = gameScene.getGraphicsContext2D();
 
 		// Separator
 		for (int i = 0; i < separator.length; i++){
@@ -121,6 +145,7 @@ public class FlappyGhost extends Application {
 		menu.getChildren().add(scoreLabel);
 		menu.getChildren().add(score);
 		root.getChildren().add(1, menu);
+
 
 		/* Après l’exécution de la fonction, le
 		   focus va automatiquement au canvas */
