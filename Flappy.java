@@ -48,7 +48,7 @@ public class Flappy extends Personnage {
 	 * Augmnenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
-		this.vy = 300;
+		this.vy = -300;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Flappy extends Personnage {
 	public boolean testIntersect(Personnage other) {
 		if (intersect(other)) {
 			this.score = 0;
-			this.setVx(120);
+			this.setVx(-120);
 			this.setAy(500);
 		}
 		return intersect(other);

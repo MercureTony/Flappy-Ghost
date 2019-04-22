@@ -50,7 +50,7 @@ public class FlappyGhost extends Application {
 	private Text score = new Text("");
 
 	// Framerate du jeu
-	private int fps = 30;
+	private int fps = 2;
 
 	// Path du dossier image
 	private static final String PATH = "images/";
@@ -92,7 +92,7 @@ public class FlappyGhost extends Application {
 			lastTime = now;
 
 			// Activer déroulement de l'arrière-plan
-			controleur.deroulerPlan(deltaTime);
+			controleur.deroulerPlan(deltaTime, fps, framerate, context, background);
 
 			// Activer la gravité pour Flappy
 			controleur.faireGravite(deltaTime);
@@ -102,22 +102,6 @@ public class FlappyGhost extends Application {
 
 			// Créer des monstres
 			controleur.creerMonstres(deltaTime);
-
-			// Animation du background
-			for (int i = 0; i < framerate.length; i++){
-				framerate[i] += controleur.flappyVx()*deltaTime;
-				if (framerate[i] < -MAX_WIDTH){
-					framerate[i] = i*MAX_WIDTH;
-				}
-			}
-
-			context.clearRect(0,0,MAX_WIDTH,MAX_HEIGHT);
-			for (int j = 0; j < framerate.length; j++){
-				context.drawImage(background,framerate[j],0);
-			}
-			if (controleur.flappyScore()!= 0 && controleur.flappyScore() % 10 == 0){
-				controleur.updateSpeed();
-			}
 		}
 	};
 
@@ -179,6 +163,7 @@ public class FlappyGhost extends Application {
 		// Dernières modifications à la scène
 		primaryStage.setTitle("Flappy Ghost");
 		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(ghost);
 
 		primaryStage.setResizable(false);
 		primaryStage.show();
