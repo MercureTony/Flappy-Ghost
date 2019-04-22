@@ -5,6 +5,8 @@ public class Flappy extends Personnage {
 
 	private static final int SCORE_INCREMENT = 5;
 
+	private boolean graviteInverse = false;
+
 	/**
 	 * Constructeur du joueur Flappy
 	 *
@@ -14,7 +16,7 @@ public class Flappy extends Personnage {
 	public Flappy(double x, double y) {
 		// Rayon de 30px
 		super(x, y, 30);
-		this.vx = -120;
+		this.vx = 120;
 	}
 
 	/**
@@ -31,13 +33,17 @@ public class Flappy extends Personnage {
 	 */
 	public void incrementScore() {
 		this.score += SCORE_INCREMENT;
+
+		if (score % (SCORE_INCREMENT * 2) == 0) {
+			this.update();
+		}
 	}
 
 	/**
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
 	 */
 	public void update() {
-		this.vy += -15;
+		this.vy += 15;
 		this.ay += 15;
 		if (this.vy < -300) {
 			this.vy = -300;
@@ -45,10 +51,36 @@ public class Flappy extends Personnage {
 	}
 
 	/**
-	 * Augmnenter la vitesse instantané à 300px/s quand le fantôme saute
+	 * Augmenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
+<<<<<<< HEAD
 		this.vy = -300;
+=======
+		this.graviteInverse = false; // Gravité normal
+		this.ay = Math.abs(this.ay);
+		this.vy = 300;
+>>>>>>> 551ec9dfd392b60355fdedfdeb1ffc80bfb3d904
+	}
+
+	/**
+	 * Déplacer Flappy avec la gravité
+	 *
+	 * @param dt Delta de temps - s
+	 */
+	@Override
+	public void move(double dt) {
+		int inverse = this.graviteInverse ? 1 : -1;
+		this.vy -= this.ay * dt;
+		this.y += inverse * this.vy * dt;
+	}
+
+	/**
+	 * Toggle direction de la gravité
+	 */
+	public void toggleGravite() {
+		this.graviteInverse = !this.graviteInverse;
+		this.ay *= -1;
 	}
 
 	/**

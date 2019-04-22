@@ -49,9 +49,12 @@ public class FlappyGhost extends Application {
 	private Text scoreLabel = new Text("Score : ");
 	private Text score = new Text("");
 
+<<<<<<< HEAD
 	// Framerate du jeu
 	private int fps = 2;
 
+=======
+>>>>>>> 551ec9dfd392b60355fdedfdeb1ffc80bfb3d904
 	// Path du dossier image
 	private static final String PATH = "images/";
 
@@ -64,8 +67,10 @@ public class FlappyGhost extends Application {
 	Circle ghostCercle = new Circle();
 
 	// Animation of the background
-	private Image background = new Image(PATH+"bg.png");
-	private double[] framerate = new double[fps];
+	private ImageView[] backgrounds = {
+		new ImageView(new Image(PATH + "bg.png")),
+		new ImageView(new Image(PATH + "bg.png"))
+	};
 
 	// Obstacles
 	private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
@@ -80,10 +85,6 @@ public class FlappyGhost extends Application {
 		public void start() {
 			lastTime = System.nanoTime();
 			super.start();
-			// Create a framerate
-			for (int i = 0; i < framerate.length; i++){
-				framerate[i] = i*MAX_WIDTH;
-			}
 		}
 
 		@Override
@@ -94,8 +95,8 @@ public class FlappyGhost extends Application {
 			// Activer déroulement de l'arrière-plan
 			controleur.deroulerPlan(deltaTime, fps, framerate, context, background);
 
-			// Activer la gravité pour Flappy
-			controleur.faireGravite(deltaTime);
+			// Activer la gravité pour Flappy - lui bouger
+			controleur.bougerFantome(deltaTime);
 
 			// Déplacer les monstres
 			controleur.bougerMonstres(deltaTime);
@@ -114,6 +115,10 @@ public class FlappyGhost extends Application {
 		Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
 		pane.getChildren().add(gameScene);
 		context = gameScene.getGraphicsContext2D();
+
+		// Arrière-plans
+		backgrounds[1].setX(MAX_WIDTH);
+		pane.getChildren().addAll(backgrounds);
 
 		// Separator
 		for (int i = 0; i < separator.length; i++){
@@ -204,10 +209,8 @@ public class FlappyGhost extends Application {
 	 */
 	public void initFlappy(int rayon) {
 		Platform.runLater(() -> {
-			pane.getChildren().add(fantomeView);
-
 			ghostCercle.setRadius(rayon);
-			pane.getChildren().add(ghostCercle);
+			pane.getChildren().addAll(fantomeView, ghostCercle);
 
 			fantomeView.setVisible(!debugMode); ghostCercle.setVisible(debugMode);
 			mouvements.start();
@@ -267,8 +270,7 @@ public class FlappyGhost extends Application {
 			obstacles.add(obsIcon); obstaclesCercles.add(obsCercle);
 			obsIcon.setVisible(!debugMode); obsCercle.setVisible(debugMode);
 
-			pane.getChildren().add(obsIcon);
-			pane.getChildren().add(obsCercle);
+			pane.getChildren().addAll(obsIcon, obsCercle);
 		});
 	}
 
@@ -331,6 +333,23 @@ public class FlappyGhost extends Application {
 
 			fantomeView.setVisible(!debugMode);
 			ghostCercle.setVisible(debugMode);
+		});
+	}
+
+	/**
+	 * Faire déflier l'arrière-plan
+	 *
+	 * @param dt Delta de temps - s
+	 * @param vitesse Vitesse de défilé - px/s
+	 */
+	public void defilerArrierePlan(double dt, double vitesse) {
+		Platform.runLater(() -> {
+			for (ImageView bg : backgrounds) {
+				bg.setX(bg.getX() - dt * vitesse);
+				if (bg.getX() <= -MAX_WIDTH) {
+					bg.setX(MAX_WIDTH);
+				}
+			}
 		});
 	}
 

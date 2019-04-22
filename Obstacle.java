@@ -47,8 +47,9 @@ public class Obstacle extends Personnage {
 	/**
 	 * Déplacer l'obstacle avec une règle par le temps
 	 *
-	 * @param t Temps actuel - s
+	 * @param t Delta temps - s
 	 */
+	@Override
 	public void move(double dt) {
 		this.x -= dt * this.vx;
 	}
