@@ -49,8 +49,13 @@ public class FlappyGhost extends Application {
 	private Text scoreLabel = new Text("Score : ");
 	private Text score = new Text("");
 
+	// Framerate du jeu
+	private int fps = 30;
+
+	// Path du dossier image
 	private static final String PATH = "images/";
 
+	// Le mode default du debugMode du jeu
 	private boolean debugMode = false;
 
 	// Instancier image du fantome
@@ -60,7 +65,7 @@ public class FlappyGhost extends Application {
 
 	// Animation of the background
 	private Image background = new Image(PATH+"bg.png");
-	private double[] framerate = new double[16];
+	private double[] framerate = new double[fps];
 
 	// Obstacles
 	private ArrayList<ImageView> obstacles = new ArrayList<ImageView>();
