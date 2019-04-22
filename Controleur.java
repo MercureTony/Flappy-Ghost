@@ -107,7 +107,9 @@ public class Controleur {
 				// Tester si intersecte
 				if (fantome.testIntersect(obs) != obs.getIntersecting()) {
 					obs.toggleIntersecting();
+
 					if (!debug) { fantome.resetScore(); }
+
 					app.changerScore(Integer.toString(fantome.getScore()));
 					app.colourierIntersection(i, obs.getIntersecting());
 				}

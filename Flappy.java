@@ -96,10 +96,6 @@ public class Flappy extends Personnage {
 	 * @return boolean if intersects
 	 */
 	public boolean testIntersect(Personnage other) {
-		if (intersect(other)) {
-			this.setVx(120);
-			this.setAy(500);
-		}
 		return intersect(other);
 	}
 
@@ -110,5 +106,7 @@ public class Flappy extends Personnage {
 	 */
 	public void resetScore() {
 		this.score = 0;
+		this.vx = 120;
+		this.ay = 500;
 	}
 }
