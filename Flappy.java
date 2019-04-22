@@ -31,6 +31,10 @@ public class Flappy extends Personnage {
 	 */
 	public void incrementScore() {
 		this.score += SCORE_INCREMENT;
+
+		if (score % (SCORE_INCREMENT * 2) == 0) {
+			this.update();
+		}
 	}
 
 	/**

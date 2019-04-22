@@ -115,9 +115,6 @@ public class FlappyGhost extends Application {
 			for (int j = 0; j < framerate.length; j++){
 				context.drawImage(background,framerate[j],0);
 			}
-			if (controleur.flappyScore()!= 0 && controleur.flappyScore() % 10 == 0){
-				controleur.updateSpeed();
-			}
 		}
 	};
 

@@ -37,27 +37,12 @@ public class Controleur {
 	}
 
 	/**
-	 *  Augmente la vitesse et l'accélération de Flappy
-	 */
-	public void updateSpeed(){
-		fantome.update();
-	}
-
-	/**
 	 *  Vitesse à l'abscisse de Flappy
 	 */
-
 	public int flappyVx(){
 		return fantome.getVx();
 	}
 
-	/**
-	 *  Score de Flappy
-	 */
-
-	public int flappyScore(){
-		return fantome.getScore();
-	}
 	/**
 	 * Faire dérouler l'arrière-plan
 	 * dépendant sur la vitesse de Flappy
