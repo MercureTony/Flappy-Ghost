@@ -17,6 +17,6 @@ public class ObstacleSinus extends Obstacle {
 	@Override
 	public void move(double dt) {
 		super.move(dt);
-		this.y = AMPLITUDE / 2 * Math.sin(this.x) + this.yInitial;
+		this.y = AMPLITUDE / 2 * Math.sin(this.x / AMPLITUDE * 2) + this.yInitial;
 	}
 }
