@@ -36,13 +36,6 @@ public class Controleur {
 	}
 
 	/**
-	 *  Vitesse à l'abscisse de Flappy
-	 */
-	public int flappyVx(){
-		return fantome.getVx();
-	}
-
-	/**
 	 * Faire subir Flappy à la gravité - lui bouger
 	 * Thread active durant tout le jeu
 	 *
@@ -69,7 +62,9 @@ public class Controleur {
 	 *
 	 * @param dt Delta de temps
 	 */
-	public void deroulerPlan(double dt) {}
+	public void deroulerPlan(double dt) {
+		app.defilerArrierePlan(dt, fantome.getVx());
+	}
 
 	/**
 	 * Faire déplacer les monstres

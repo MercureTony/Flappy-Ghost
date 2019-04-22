@@ -16,7 +16,7 @@ public class Flappy extends Personnage {
 	public Flappy(double x, double y) {
 		// Rayon de 30px
 		super(x, y, 30);
-		this.vx = -120;
+		this.vx = 120;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
 	 */
 	public void update() {
-		this.vy += -15;
+		this.vy += 15;
 		this.ay += 15;
 		if (this.vy < -300) {
 			this.vy = -300;
@@ -51,7 +51,7 @@ public class Flappy extends Personnage {
 	}
 
 	/**
-	 * Augmnenter la vitesse instantané à 300px/s quand le fantôme saute
+	 * Augmenter la vitesse instantané à 300px/s quand le fantôme saute
 	 */
 	public void jump() {
 		this.graviteInverse = false; // Gravité normal
