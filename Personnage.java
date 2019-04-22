@@ -1,3 +1,12 @@
+/**
+ * Classe Personnage
+ * Les personnages qui bougent dans le jeu
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 public abstract class Personnage {
 
 	protected double x; // Du centre - px

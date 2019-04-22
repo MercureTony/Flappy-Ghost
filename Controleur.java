@@ -1,3 +1,12 @@
+/**
+ *  Classe controlleur
+ *  Fait le lien entre la vue et le modèle
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 import java.util.ArrayList;
 
 public class Controleur {
@@ -139,10 +148,10 @@ public class Controleur {
 					obs = new ObstacleSinus(initialX, initialY);
 					break;
 				case 1:
-					obs = new ObstacleStatique(initialX, initialY);
+					obs = new ObstacleQuantique(initialX, initialY);
 					break;
 				case 2:
-					obs = new ObstacleQuantique(initialX, initialY);
+					obs = new Obstacle(initialX, initialY); // Statique par défaut
 					break;
 			}
 

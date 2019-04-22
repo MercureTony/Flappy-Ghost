@@ -1,3 +1,12 @@
+/**
+ * Classe FlappyGhost
+ * Construit la vue du jeu et le démarre
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
@@ -8,7 +17,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
@@ -37,7 +45,6 @@ public class FlappyGhost extends Application {
 	// Platform design
 	VBox root = new VBox();
 	Scene scene = new Scene(root, MAX_WIDTH, MAX_HEIGHT);
-	GraphicsContext context;
 
 	// Background scene
 	Pane pane = new Pane();
@@ -108,7 +115,6 @@ public class FlappyGhost extends Application {
 		root.getChildren().add(pane);
 		Canvas gameScene = new Canvas(MAX_WIDTH, GAME_HEIGHT);
 		pane.getChildren().add(gameScene);
-		context = gameScene.getGraphicsContext2D();
 
 		// Arrière-plans
 		backgrounds[1].setX(MAX_WIDTH);

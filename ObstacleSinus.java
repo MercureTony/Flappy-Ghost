@@ -1,3 +1,12 @@
+/**
+ * Classe ObstacleSinus
+ * Obstacle qui se déplace en façon sinusoidale
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 public class ObstacleSinus extends Obstacle {
 
 	public static final int AMPLITUDE = 50; // px

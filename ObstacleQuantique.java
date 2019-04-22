@@ -1,3 +1,12 @@
+/**
+ * Classe ObstacleQuantique
+ * Un obstacle qui peut se téléporter pour se déplacer
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 public class ObstacleQuantique extends Obstacle {
 
 	private double teleportTime = 0; // Accumulateur de temps à l'incrément

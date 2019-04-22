@@ -1,3 +1,12 @@
+/**
+ * Classe Flappy
+ * Le personnage principal du jeu
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 public class Flappy extends Personnage {
 
 	// Score de Flappy
@@ -68,7 +77,7 @@ public class Flappy extends Personnage {
 	@Override
 	public void move(double dt) {
 		this.vy -= this.ay * dt;
-		this.y += this.vy * dt;
+		this.y -= this.vy * dt;
 	}
 
 	/**

@@ -1,3 +1,13 @@
+/**
+ * Classe Obstacle
+ * Une personnage qui Flappy doit éviter
+ * Par défaut de type statique
+ *
+ * @author Étienne Beaulé
+ * @author Anthony Uyende
+ * @date 22 avril 2019
+ */
+
 public class Obstacle extends Personnage {
 
 	public static final int NBR_IMAGES = 46;
