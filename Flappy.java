@@ -43,7 +43,7 @@ public class Flappy extends Personnage {
 	 * Augmenter la vitesse/accélération après deux obstacles dépassés
 	 */
 	public void update() {
-		this.vy += 15;
+		this.vx += 15;
 		this.ay += 15;
 		if (this.vy < -300) {
 			this.vy = -300;
